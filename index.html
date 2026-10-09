@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>J Sairam | Portfolio - AI, Web & Embedded Systems</title>
+  <meta name="description" content="Portfolio of J Sairam, engineering student at Kumaraguru College of Technology specializing in AI/ML, Web Development, Embedded Systems, and Database Design.">
+  <!-- Google Fonts for Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Background Ambient Glow Effects -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-accent">&lt;</span>JS<span class="logo-accent">/&gt;</span>
+        <span class="logo-name">J Sairam</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#timeline" class="nav-link">Journey</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Theme Toggle & Mobile Menu) -->
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle Theme">
+          <i data-lucide="moon" class="theme-icon dark-icon"></i>
+          <i data-lucide="sun" class="theme-icon light-icon"></i>
+        </button>
+
+        <a href="#contact" class="btn btn-sm btn-primary nav-cta">Let's Connect</a>
+
+        <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <i data-lucide="menu" class="open-icon"></i>
+          <i data-lucide="x" class="close-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            <span>Kumaraguru College of Technology</span>
+          </div>
+
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-text">J Sairam</span>
+          </h1>
+
+          <div class="hero-role-wrapper">
+            <span class="role-prefix">Passionate about </span>
+            <span class="typing-text" id="typingText">AI & Machine Learning</span>
+            <span class="cursor">|</span>
+          </div>
+
+          <p class="hero-description">
+            Building intelligent algorithms, user-centric web applications, and resilient embedded IoT systems. Focused on solving impactful real-world challenges through clean engineering.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn btn-primary">
+              <i data-lucide="folder-code"></i> View Projects
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              <i data-lucide="send"></i> Get In Touch
+            </a>
+            <button class="btn btn-ghost" id="viewResumeBtn" title="View Resume summary">
+              <i data-lucide="file-text"></i> Quick Bio
+            </button>
+          </div>
+
+          <div class="hero-socials">
+            <span class="socials-label">Connect:</span>
+            <a href="https://github.com/JSairam2007" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+              <i data-lucide="github"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+              <i data-lucide="linkedin"></i>
+            </a>
+            <a href="mailto:sairam.j@example.com" class="social-icon" aria-label="Email">
+              <i data-lucide="mail"></i>
+            </a>
+            <a href="#skills" class="social-icon" aria-label="Tech Stack">
+              <i data-lucide="cpu"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-card-wrapper">
+          <div class="terminal-card">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="terminal-title">sairam_profile.json</span>
+              <span class="terminal-tag">Active</span>
+            </div>
+            <div class="terminal-body">
+              <pre><code><span class="code-keyword">const</span> <span class="code-var">engineer</span> = {
+  <span class="code-prop">name</span>: <span class="code-str">"J Sairam"</span>,
+  <span class="code-prop">college</span>: <span class="code-str">"Kumaraguru College of Tech"</span>,
+  <span class="code-prop">focusAreas</span>: [
+    <span class="code-str">"AI & Machine Learning"</span>,
+    <span class="code-str">"Full-Stack Web Dev"</span>,
+    <span class="code-str">"Embedded Systems & IoT"</span>,
+    <span class="code-str">"Relational Database Design"</span>
+  ],
+  <span class="code-prop">coreLanguages</span>: [<span class="code-str">"Python"</span>, <span class="code-str">"C"</span>, <span class="code-str">"C++"</span>, <span class="code-str">"Java"</span>],
+  <span class="code-prop">projectsCount</span>: <span class="code-num">9</span>,
+  <span class="code-prop">openToOpportunities</span>: <span class="code-bool">true</span>
+};</code></pre>
+            </div>
+            <div class="terminal-footer">
+              <div class="stat-item">
+                <span class="stat-number">9+</span>
+                <span class="stat-label">Projects</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Core Domains</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Dedication</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">About Me</span>
+          <h2 class="section-title">Engineering With Purpose &amp; Innovation</h2>
+          <p class="section-subtitle">
+            Student at Kumaraguru College of Technology with an enthusiasm for bridging software intelligence with physical and data architecture.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card glass-panel">
+            <div class="about-icon-box">
+              <i data-lucide="graduation-cap"></i>
+            </div>
+            <h3 class="about-card-title">Academic Background</h3>
+            <p class="about-card-text">
+              Pursuing engineering studies at <strong>Kumaraguru College of Technology (KCT)</strong>. Actively engaging in coursework and hands-on projects spanning system programming, algorithmic problem-solving, and database engineering.
+            </p>
+          </div>
+
+          <div class="about-card glass-panel">
+            <div class="about-icon-box">
+              <i data-lucide="brain-circuit"></i>
+            </div>
+            <h3 class="about-card-title">AI &amp; Smart Systems</h3>
+            <p class="about-card-text">
+              Passionate about deep learning, multilingual natural language processing, and perception safety in autonomous applications. From healthcare platforms (AIDLY) to automotive NLP analyzers.
+            </p>
+          </div>
+
+          <div class="about-card glass-panel">
+            <div class="about-icon-box">
+              <i data-lucide="layers"></i>
+            </div>
+            <h3 class="about-card-title">Full-Stack &amp; Databases</h3>
+            <p class="about-card-text">
+              Experienced in structuring relational data models, ER diagrams, and designing responsive, user-friendly digital platforms tailored for social impact, rural youth education, and automotive backends.
+            </p>
+          </div>
+
+          <div class="about-card glass-panel">
+            <div class="about-icon-box">
+              <i data-lucide="microchip"></i>
+            </div>
+            <h3 class="about-card-title">IoT &amp; Embedded Systems</h3>
+            <p class="about-card-text">
+              Hands-on exploration with microcontrollers, Raspberry Pi, sensor arrays, actuators, and edge computing for real-time monitoring such as smart fuel theft prevention systems.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Technical Competencies</span>
+          <h2 class="section-title">My Technology Stack</h2>
+          <p class="section-subtitle">
+            A versatile toolkit spanning low-level systems, high-level web engineering, AI algorithms, and hardware integration.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <!-- Skill Card 1: Programming -->
+          <div class="skill-category-card glass-panel">
+            <div class="skill-header">
+              <div class="skill-icon"><i data-lucide="code-2"></i></div>
+              <div>
+                <h3 class="skill-title">1. Programming</h3>
+                <span class="skill-count">Core Languages</span>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">C</span>
+              <span class="tag">Python</span>
+              <span class="tag">C++</span>
+              <span class="tag">Java (Basics)</span>
+              <span class="tag">Object-Oriented Programming</span>
+              <span class="tag">Data Structures</span>
+            </div>
+            <p class="skill-desc">Solid grounding in algorithmic logic, memory management, and structured application development.</p>
+          </div>
+
+          <!-- Skill Card 2: AI & ML -->
+          <div class="skill-category-card glass-panel">
+            <div class="skill-header">
+              <div class="skill-icon"><i data-lucide="bot"></i></div>
+              <div>
+                <h3 class="skill-title">2. AI and ML</h3>
+                <span class="skill-count">Intelligent Systems</span>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">NLP & Sentiment Analysis</span>
+              <span class="tag">Multilingual Processing</span>
+              <span class="tag">AI Chatbots</span>
+              <span class="tag">Computer Vision Failures</span>
+              <span class="tag">Autonomous Systems Research</span>
+            </div>
+            <p class="skill-desc">Developing AI prototypes for healthcare, customer voice analysis, and investigating perception safety.</p>
+          </div>
+
+          <!-- Skill Card 3: Web Development -->
+          <div class="skill-category-card glass-panel">
+            <div class="skill-header">
+              <div class="skill-icon"><i data-lucide="globe"></i></div>
+              <div>
+                <h3 class="skill-title">3. Web Development</h3>
+                <span class="skill-count">Interactive Web Apps</span>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3 / Modern CSS</span>
+              <span class="tag">JavaScript (ES6+)</span>
+              <span class="tag">Responsive Web Design</span>
+              <span class="tag">REST API Integration</span>
+              <span class="tag">Platform Architecture</span>
+            </div>
+            <p class="skill-desc">Building fast, clean, user-centric web applications and portals optimized for accessibility and performance.</p>
+          </div>
+
+          <!-- Skill Card 4: Database Management -->
+          <div class="skill-category-card glass-panel">
+            <div class="skill-header">
+              <div class="skill-icon"><i data-lucide="database"></i></div>
+              <div>
+                <h3 class="skill-title">4. Database Management</h3>
+                <span class="skill-count">Data Architectures</span>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Relational Modeling</span>
+              <span class="tag">SQL</span>
+              <span class="tag">ER Diagrams</span>
+              <span class="tag">Schema Normalization</span>
+              <span class="tag">Automotive Business Workflows</span>
+              <span class="tag">Data Integrity</span>
+            </div>
+            <p class="skill-desc">Structuring complex database systems, optimizing entity relationships, and translating business workflows to schemas.</p>
+          </div>
+
+          <!-- Skill Card 5: UI/UX & Digital Design -->
+          <div class="skill-category-card glass-panel">
+            <div class="skill-header">
+              <div class="skill-icon"><i data-lucide="palette"></i></div>
+              <div>
+                <h3 class="skill-title">5. UI/UX &amp; Digital Design</h3>
+                <span class="skill-count">Human-Centered Design</span>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">User-Centered Design</span>
+              <span class="tag">Wireframing</span>
+              <span class="tag">Interactive Prototyping</span>
+              <span class="tag">Information Architecture</span>
+              <span class="tag">Special Ed Accessibility</span>
+              <span class="tag">Slide Deck & Visual Design</span>
+            </div>
+            <p class="skill-desc">Designing intuitive user interfaces that balance aesthetic clarity, emotional empathy, and usability.</p>
+          </div>
+
+          <!-- Skill Card 6: Embedded Systems & IoT -->
+          <div class="skill-category-card glass-panel">
+            <div class="skill-header">
+              <div class="skill-icon"><i data-lucide="circuit-board"></i></div>
+              <div>
+                <h3 class="skill-title">6. Embedded Systems</h3>
+                <span class="skill-count">Hardware &amp; IoT</span>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Raspberry Pi</span>
+              <span class="tag">Sensors & Actuators</span>
+              <span class="tag">Circuit Prototyping</span>
+              <span class="tag">Edge Computing</span>
+              <span class="tag">Real-time Telemetry</span>
+              <span class="tag">Hardware-Software Interfacing</span>
+            </div>
+            <p class="skill-desc">Creating smart connected hardware devices for automated monitoring, anti-theft alarms, and sensor telemetry.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Featured Works</span>
+          <h2 class="section-title">Projects &amp; Prototypes</h2>
+          <p class="section-subtitle">
+            Explore my 9 engineering projects, software prototypes, and research case studies. Filter by domain or click for in-depth technical details.
+          </p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="filter-container">
+          <button class="filter-btn active" data-filter="all">All Projects (9)</button>
+          <button class="filter-btn" data-filter="ai-ml">AI &amp; ML</button>
+          <button class="filter-btn" data-filter="web-platform">Web &amp; Platforms</button>
+          <button class="filter-btn" data-filter="iot-embedded">IoT &amp; Embedded</button>
+          <button class="filter-btn" data-filter="research-academic">Research &amp; Case Studies</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projectsGrid">
+
+          <!-- Project 1: AIDLY -->
+          <article class="project-card glass-panel" data-category="web-platform ai-ml" data-id="aidly">
+            <div class="card-badge-row">
+              <span class="category-badge badge-primary">AI + Healthcare</span>
+              <span class="status-indicator">Featured Prototype</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="heart-pulse"></i></div>
+              <h3 class="project-title">AIDLY – AI-Powered Healthcare &amp; Caregiver Platform</h3>
+            </div>
+            <p class="project-summary">
+              A comprehensive digital health platform connecting patients with skilled caregivers through verified profiles, transparent pricing, and an intelligent chatbot for medical awareness.
+            </p>
+            <ul class="project-highlights">
+              <li>Verified caregiver profiles with clear transparent pricing</li>
+              <li>AI chatbot for 24/7 medicine awareness &amp; verified health FAQs</li>
+              <li>Personalized patient-caregiver matching system</li>
+              <li>Designed for validation with families and healthcare professionals</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">AI Chatbot</span>
+              <span class="tech-pill">Web Platform</span>
+              <span class="tech-pill">Healthcare UI</span>
+              <span class="tech-pill">Caregiver Verification</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="aidly">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 2: Skill-Building Platform for Rural Youth -->
+          <article class="project-card glass-panel" data-category="web-platform" data-id="rural-skills">
+            <div class="card-badge-row">
+              <span class="category-badge badge-accent">Web &amp; EdTech</span>
+              <span class="status-indicator">Social Impact</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="sparkles"></i></div>
+              <h3 class="project-title">Skill-Building Platform for Rural Youth</h3>
+            </div>
+            <p class="project-summary">
+              A targeted digital learning ecosystem crafted to empower youth in rural communities with career-oriented practical skills and employment pathways.
+            </p>
+            <ul class="project-highlights">
+              <li>Curated online modules focused on vocational &amp; digital skills</li>
+              <li>Bridge connecting rural learners directly to job opportunities</li>
+              <li>Accessible, lightweight digital learning resources</li>
+              <li>Comprehensive 7-slide architectural roadmap &amp; presentation</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">Web Platform</span>
+              <span class="tech-pill">EdTech</span>
+              <span class="tech-pill">UI/UX</span>
+              <span class="tech-pill">Youth Empowerment</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="rural-skills">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 3: Smart Petrol/Fuel Level Monitoring System -->
+          <article class="project-card glass-panel" data-category="iot-embedded" data-id="smart-fuel">
+            <div class="card-badge-row">
+              <span class="category-badge badge-warning">IoT &amp; Security</span>
+              <span class="status-indicator">Hardware Prototype</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="fuel"></i></div>
+              <h3 class="project-title">Smart Petrol/Fuel Level Monitoring System</h3>
+            </div>
+            <p class="project-summary">
+              An IoT hardware solution designed to continuously monitor vehicular fuel levels and trigger rapid alerts upon detecting abnormal or sudden fuel loss.
+            </p>
+            <ul class="project-highlights">
+              <li>Real-time telemetry and continuous fuel-level monitoring</li>
+              <li>Algorithmic detection of anomalous fuel drops</li>
+              <li>Instant alarm and owner notification system against fuel theft</li>
+              <li>Sensor-to-microcontroller circuit integration</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">Embedded C</span>
+              <span class="tech-pill">IoT Sensors</span>
+              <span class="tech-pill">Theft Detection</span>
+              <span class="tech-pill">Alarm System</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="smart-fuel">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 4: AI-Based Multilingual Automotive Complaint Analysis -->
+          <article class="project-card glass-panel" data-category="ai-ml" data-id="automotive-nlp">
+            <div class="card-badge-row">
+              <span class="category-badge badge-primary">AI &amp; NLP</span>
+              <span class="status-indicator">Automotive Tech</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="message-square-code"></i></div>
+              <h3 class="project-title">AI-Based Multilingual Automotive Complaint Analysis</h3>
+            </div>
+            <p class="project-summary">
+              An intelligent speech and text analytics system processing customer service calls across diverse regional languages to extract actionable automotive maintenance insights.
+            </p>
+            <ul class="project-highlights">
+              <li>Processes customer conversations across multiple regional dialects</li>
+              <li>Automated extraction and categorization of technical complaints</li>
+              <li>Sentiment scoring and identification of recurring mechanical issues</li>
+              <li>Transforms unstructured phone calls into structured dashboard analytics</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">NLP</span>
+              <span class="tech-pill">Multilingual Speech</span>
+              <span class="tech-pill">Sentiment Analysis</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="automotive-nlp">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 5: When Cars Hallucinate: Failure of AI in Autonomous Driving -->
+          <article class="project-card glass-panel" data-category="ai-ml research-academic" data-id="cars-hallucinate">
+            <div class="card-badge-row">
+              <span class="category-badge badge-danger">Research &amp; Safety</span>
+              <span class="status-indicator">AI Case Study</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="car"></i></div>
+              <h3 class="project-title">When Cars Hallucinate: AI Failure in Autonomous Driving</h3>
+            </div>
+            <p class="project-summary">
+              A deep-dive research investigation into perception anomalies, sensor illusions, and decision-making failures in artificial neural networks within autonomous vehicles.
+            </p>
+            <ul class="project-highlights">
+              <li>Comprehensive taxonomy of computer vision perception errors</li>
+              <li>Analysis of camera and LiDAR/radar sensor misinterpretations</li>
+              <li>Root-cause breakdown of high-risk driving miscalculations</li>
+              <li>Safety recommendations for robust edge-case validation</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">Autonomous Driving</span>
+              <span class="tech-pill">Computer Vision</span>
+              <span class="tech-pill">AI Safety</span>
+              <span class="tech-pill">Edge Cases</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="cars-hallucinate">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 6: Automotive Backend & Database Design -->
+          <article class="project-card glass-panel" data-category="web-platform" data-id="auto-backend">
+            <div class="card-badge-row">
+              <span class="category-badge badge-accent">Backend &amp; DB</span>
+              <span class="status-indicator">Architecture</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="database"></i></div>
+              <h3 class="project-title">Automotive Backend &amp; Database Design</h3>
+            </div>
+            <p class="project-summary">
+              Engineered data architecture and backend workflow models for automotive service centers, integrating vehicle telemetry, inventory, and customer ticketing.
+            </p>
+            <ul class="project-highlights">
+              <li>Detailed Relational Data Modeling and Entity-Relationship (ER) design</li>
+              <li>Clean normalization ensuring high transactional integrity</li>
+              <li>Mapping automotive service center workflows to database schemas</li>
+              <li>VS Code backend architecture exploration and query design</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">Relational DB</span>
+              <span class="tech-pill">SQL</span>
+              <span class="tech-pill">ER Diagrams</span>
+              <span class="tech-pill">Backend Architecture</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="auto-backend">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 7: Sensor-Based Embedded Systems / IoT Lab -->
+          <article class="project-card glass-panel" data-category="iot-embedded" data-id="iot-lab">
+            <div class="card-badge-row">
+              <span class="category-badge badge-warning">IoT &amp; Hardware</span>
+              <span class="status-indicator">Hardware Lab</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="cpu"></i></div>
+              <h3 class="project-title">Sensor-Based Embedded Systems / IoT Lab</h3>
+            </div>
+            <p class="project-summary">
+              Hands-on engineering investigation of physical computing, sensor-actuator interfacing, microcontrollers, and edge computing architectures using Raspberry Pi.
+            </p>
+            <ul class="project-highlights">
+              <li>Circuit prototyping with analog &amp; digital sensors and actuators</li>
+              <li>Raspberry Pi GPIO programming and communication protocols</li>
+              <li>Telemetry collection and edge-level computing paradigms</li>
+              <li>Bridging hardware signal processing with software logic</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">Raspberry Pi</span>
+              <span class="tech-pill">Sensors &amp; Actuators</span>
+              <span class="tech-pill">Edge Computing</span>
+              <span class="tech-pill">Circuit Design</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="iot-lab">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 8: Kaziranga National Park – Nature Conservation Case Study -->
+          <article class="project-card glass-panel" data-category="research-academic" data-id="kaziranga">
+            <div class="card-badge-row">
+              <span class="category-badge badge-success">Conservation Study</span>
+              <span class="status-indicator">Team Research</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="trees"></i></div>
+              <h3 class="project-title">Kaziranga National Park – Nature Conservation Study</h3>
+            </div>
+            <p class="project-summary">
+              An academic case study and structured presentation exploring ecological preservation, biodiversity protection, and anti-poaching measures at Kaziranga National Park.
+            </p>
+            <ul class="project-highlights">
+              <li>Analyzed wildlife ecosystem vulnerabilities and protection initiatives</li>
+              <li>Researched technology applications in anti-poaching surveillance</li>
+              <li>Curated a focused, nature-themed 4-slide team presentation</li>
+              <li>Synthesized complex conservation challenges into clear actions</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">Ecology &amp; Conservation</span>
+              <span class="tech-pill">Case Study</span>
+              <span class="tech-pill">Team Collaboration</span>
+              <span class="tech-pill">Slide Design</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="kaziranga">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 9: Digital Support for Special Education -->
+          <article class="project-card glass-panel" data-category="research-academic web-platform" data-id="special-ed">
+            <div class="card-badge-row">
+              <span class="category-badge badge-primary">Assistive Tech</span>
+              <span class="status-indicator">Academic Project</span>
+            </div>
+            <div class="project-card-header">
+              <div class="project-icon-box"><i data-lucide="smile"></i></div>
+              <h3 class="project-title">Digital Support for Special Education</h3>
+            </div>
+            <p class="project-summary">
+              An empathetic research study proposing digital assistive tools for neurodivergent students navigating social cues, emotional regulation, and peer friendship.
+            </p>
+            <ul class="project-highlights">
+              <li>Researched digital interventions to alleviate social isolation</li>
+              <li>Concept designs for interactive emotional cue interpreters</li>
+              <li>Emphasis on student self-esteem and inclusive digital experiences</li>
+              <li>Presented structured assistive tech recommendations for educators</li>
+            </ul>
+            <div class="project-tech-stack">
+              <span class="tech-pill">Assistive Tech</span>
+              <span class="tech-pill">Inclusive UX</span>
+              <span class="tech-pill">Special Education</span>
+              <span class="tech-pill">Human-Centered</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-sm btn-outline open-modal-btn" data-project="special-ed">
+                <i data-lucide="info"></i> Project Details
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience / Journey Timeline Section -->
+    <section class="section timeline-section" id="timeline">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Academic &amp; Project Journey</span>
+          <h2 class="section-title">Milestones &amp; Experience</h2>
+          <p class="section-subtitle">
+            A chronological timeline of learning, building, and exploring multidisciplinary engineering domains.
+          </p>
+        </div>
+
+        <div class="timeline-wrapper">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-date">Present • Coimbatore, TN</div>
+              <h3 class="timeline-title">Engineering Student @ Kumaraguru College of Technology</h3>
+              <p class="timeline-desc">
+                Pursuing rigorous technical training with deep immersion into computer programming (C, Python, C++, Java), algorithmic problem-solving, and system engineering.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-date">AI &amp; Health Prototype</div>
+              <h3 class="timeline-title">Conception &amp; Prototyping of AIDLY</h3>
+              <p class="timeline-desc">
+                Architected the AIDLY healthcare portal concept, integrating caregiver verification workflows with an AI conversational assistant for medication guidance.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-date">Hardware &amp; IoT Exploration</div>
+              <h3 class="timeline-title">Embedded Systems &amp; Smart Fuel Theft Detector</h3>
+              <p class="timeline-desc">
+                Engineered sensor-based fuel monitoring prototype to detect rapid fuel level depletion and studied Raspberry Pi edge computing frameworks.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 4 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-date">Automotive &amp; NLP Research</div>
+              <h3 class="timeline-title">Multilingual Automotive NLP &amp; Perception Safety Studies</h3>
+              <p class="timeline-desc">
+                Explored regional speech analysis for automotive maintenance calls and published investigative insights on autonomous driving vision system failures.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Get In Touch</span>
+          <h2 class="section-title">Let's Build Something Great</h2>
+          <p class="section-subtitle">
+            Whether you are looking for a dedicated intern, collaborator on AI/IoT projects, or have feedback on my prototypes, feel free to reach out!
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info Cards -->
+          <div class="contact-info-col">
+            <div class="contact-card glass-panel">
+              <div class="contact-icon"><i data-lucide="mail"></i></div>
+              <div>
+                <h4 class="contact-card-title">Email</h4>
+                <p class="contact-card-sub">Let's talk code or collaboration</p>
+                <a href="mailto:sairam.j@example.com" class="contact-link" id="emailDisplay">sairam.j@example.com</a>
+              </div>
+            </div>
+
+            <div class="contact-card glass-panel">
+              <div class="contact-icon"><i data-lucide="map-pin"></i></div>
+              <div>
+                <h4 class="contact-card-title">Location &amp; Institution</h4>
+                <p class="contact-card-sub">Kumaraguru College of Technology</p>
+                <span class="contact-text">Coimbatore, Tamil Nadu, India</span>
+              </div>
+            </div>
+
+            <div class="contact-card glass-panel">
+              <div class="contact-icon"><i data-lucide="share-2"></i></div>
+              <div>
+                <h4 class="contact-card-title">Professional Profiles</h4>
+                <p class="contact-card-sub">Connect online</p>
+                <div class="contact-social-links">
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="badge-link">
+                    <i data-lucide="linkedin"></i> LinkedIn
+                  </a>
+                  <a href="https://github.com/JSairam2007" target="_blank" rel="noopener noreferrer" class="badge-link">
+                    <i data-lucide="github"></i> GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-col">
+            <form class="contact-form glass-panel" id="contactForm">
+              <h3 class="form-title">Send a Direct Message</h3>
+
+              <div class="form-group">
+                <label for="senderName" class="form-label">Your Name</label>
+                <div class="input-wrapper">
+                  <i data-lucide="user" class="input-icon"></i>
+                  <input type="text" id="senderName" class="form-input" placeholder="e.g. Alex Turner" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="senderEmail" class="form-label">Your Email</label>
+                <div class="input-wrapper">
+                  <i data-lucide="at-sign" class="input-icon"></i>
+                  <input type="email" id="senderEmail" class="form-input" placeholder="e.g. alex@company.com" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="messageSubject" class="form-label">Subject</label>
+                <div class="input-wrapper">
+                  <i data-lucide="tag" class="input-icon"></i>
+                  <input type="text" id="messageSubject" class="form-input" placeholder="Project Collaboration / Internship Opportunity" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="messageBody" class="form-label">Your Message</label>
+                <textarea id="messageBody" class="form-textarea" rows="4" placeholder="Hi Sairam, I saw your work on AIDLY and the fuel monitoring system..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block" id="submitFormBtn">
+                <i data-lucide="send"></i> Send Message
+              </button>
+
+              <div class="form-status" id="formStatus" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Project Details Modal -->
+  <div class="modal-overlay" id="projectModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-box glass-panel">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close details popup">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-badge-wrapper">
+          <span class="category-badge" id="modalCategory">Category</span>
+          <span class="status-indicator" id="modalStatus">Status</span>
+        </div>
+        <h2 class="modal-title" id="modalTitle">Project Title</h2>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="file-text"></i> Overview</h4>
+          <p id="modalDescription" class="modal-text">Project overview description goes here.</p>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="check-circle-2"></i> Key Features &amp; Innovations</h4>
+          <ul id="modalFeaturesList" class="modal-feature-list"></ul>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="layers"></i> Technologies &amp; Methodologies</h4>
+          <div id="modalTechStack" class="modal-tech-pills"></div>
+        </div>
+
+        <div class="modal-section" id="modalTakeawaysSection">
+          <h4 class="modal-section-title"><i data-lucide="lightbulb"></i> Impact &amp; Engineering Learning</h4>
+          <p id="modalTakeaways" class="modal-text">Learnings and results.</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#contact" class="btn btn-sm btn-primary modal-action-btn" id="modalContactBtn">
+          <i data-lucide="message-circle"></i> Discuss This Project
+        </a>
+        <button class="btn btn-sm btn-secondary" id="modalDoneBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bio Summary Modal (Quick View) -->
+  <div class="modal-overlay" id="bioModal" aria-hidden="true" role="dialog">
+    <div class="modal-box glass-panel bio-modal-box">
+      <button class="modal-close-btn" id="bioModalCloseBtn" aria-label="Close bio popup">
+        <i data-lucide="x"></i>
+      </button>
+      <div class="modal-header">
+        <span class="category-badge badge-primary">Candidate Profile</span>
+        <h2 class="modal-title">J Sairam • Engineering Profile</h2>
+        <p class="modal-subtitle">Kumaraguru College of Technology, Coimbatore</p>
+      </div>
+      <div class="modal-body">
+        <div class="bio-summary-grid">
+          <div class="bio-item">
+            <strong>Institution:</strong>
+            <span>Kumaraguru College of Technology (KCT)</span>
+          </div>
+          <div class="bio-item">
+            <strong>Core Programming:</strong>
+            <span>C, Python, C++, Java (Basics)</span>
+          </div>
+          <div class="bio-item">
+            <strong>Applied AI / ML:</strong>
+            <span>NLP, Sentiment Analysis, Healthcare Chatbots, Autonomous Perception Safety</span>
+          </div>
+          <div class="bio-item">
+            <strong>Hardware &amp; IoT:</strong>
+            <span>Raspberry Pi, Sensors, Liquid Telemetry, Circuit Integration</span>
+          </div>
+          <div class="bio-item">
+            <strong>Web &amp; DB:</strong>
+            <span>HTML5, CSS3, JavaScript, Relational Database Modeling, ER Design</span>
+          </div>
+          <div class="bio-item">
+            <strong>Design &amp; Accessibility:</strong>
+            <span>UI/UX, Special Education Assistive Interfaces, Inclusive Design</span>
+          </div>
+        </div>
+        <p class="modal-text mt-3">
+          Sairam combines structured software programming with real-world curiosity in machine learning models and embedded physical electronics. Looking forward to impactful internships, research collaborations, and software engineering roles.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#contact" class="btn btn-sm btn-primary" id="bioContactBtn">Contact Sairam</a>
+        <button class="btn btn-sm btn-secondary" id="bioDoneBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="footer-logo">&lt;JS/&gt; J Sairam</span>
+        <p class="footer-copy">Student at Kumaraguru College of Technology. Crafted with precision &amp; modern web standards.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#hero" class="back-to-top" id="backToTop" aria-label="Back to top">
+          Back to Top <i data-lucide="arrow-up"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
