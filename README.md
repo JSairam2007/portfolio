@@ -67,12 +67,74 @@ portfolio/
 - **Interactive Detail Modal**:
   - Click **"Project Details"** on any card to view detailed problem statements, feature breakdown, tech stack badges, and engineering takeaways.
 
+- **ProtoSem — Innovation Engineering Journey (Weekly Learning Journal)**:
+  - Documenting hands-on engineering, embedded systems, design thinking, and digital fabrication during the ProtoSem Fellowship.
+  - Interactive weekly timeline & tab switcher (Week 0, Week 6, etc.).
+  - Left panel: featured visual representation, category badge, and clickable prototype/activity gallery grid.
+  - Right panel: weekly learning insights, activities performed, technologies & tools, skills learned, challenges & problem-solving callout, and key takeaways.
+  - Interactive Lightbox: full preview of gallery items with title, caption, counter, and keyboard navigation.
+  - Detailed Reflection Modal: comprehensive view of weekly engineering reflections and practical contributions.
+
 - **Academic & Project Journey**:
   - Chronological timeline illustrating academic and technical milestones.
 
 - **Contact & Connect Section**:
   - Direct contact cards (Email, Coimbatore / KCT, LinkedIn, GitHub).
   - Working client-side contact form with real-time feedback and validation.
+
+---
+
+## 📘 How to Add a New ProtoSem Week
+
+To add a new week (e.g., Week 1, Week 2, Week 7...), open [`script.js`](file:///C:/Users/J%20Sairam/.gemini/antigravity/scratch/portfolio/script.js) and append a new object to the `PROTOSEM_WEEKS` array:
+
+```javascript
+{
+  week: 1,
+  title: "Your Week Title Here",
+  category: "Domain / Category",
+  badgeClass: "badge-accent", // badge-primary, badge-warning, badge-success, badge-accent
+  status: "Completed",
+  description: "One-sentence summary of what was accomplished this week.",
+  overview: "Detailed narrative overview of the week's focus.",
+  insights: [
+    "Insight bullet point 1...",
+    "Insight bullet point 2..."
+  ],
+  activities: [
+    "Practical activity 1...",
+    "Practical activity 2..."
+  ],
+  technologies: [
+    "Tool 1", "Framework 2"
+  ],
+  skills: [
+    "Skill 1", "Skill 2"
+  ],
+  challenges: "Describe the specific technical hurdle encountered and how it was solved.",
+  keyTakeaways: [
+    "Key engineering lesson 1...",
+    "Key engineering lesson 2..."
+  ],
+  featuredVisual: {
+    icon: "cpu", // Lucide icon name (e.g. cpu, layers, circuit-board, code)
+    badge: "MODULE BADGE",
+    title: "Visual Card Title",
+    sub: "Short subtitle"
+  },
+  gallery: [
+    {
+      title: "Activity / Screenshot Title",
+      caption: "Detailed explanation of what this artifact or photo represents.",
+      alt: "Meaningful accessibility text",
+      icon: "camera"
+    }
+  ],
+  reflection: "Personal engineering reflection on what was learned and how it changes your approach."
+}
+```
+
+The weekly tab selector, navigation buttons, and detail modals will automatically render the new week!
 
 ---
 

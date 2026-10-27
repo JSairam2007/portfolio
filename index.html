@@ -34,6 +34,7 @@
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
           <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#protosem" class="nav-link">ProtoSem</a></li>
           <li><a href="#timeline" class="nav-link">Journey</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -659,6 +660,180 @@
       </div>
     </section>
 
+    <!-- ProtoSem Internship & Learning Journal Section -->
+    <section class="section protosem-section" id="protosem">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Internship &amp; Engineering Journal</span>
+          <h2 class="section-title">ProtoSem — Innovation Engineering Journey</h2>
+          <p class="section-subtitle">
+            Documenting my learning journey through hands-on engineering, design thinking, electronics, digital fabrication, embedded systems, and practical problem-solving.
+          </p>
+        </div>
+
+        <!-- Program Overview Context Card -->
+        <div class="protosem-overview-card glass-panel">
+          <div class="proto-overview-grid">
+            <div class="proto-overview-item">
+              <div class="proto-overview-icon">
+                <i data-lucide="compass"></i>
+              </div>
+              <div class="proto-overview-text">
+                <span class="proto-meta-label">Program &amp; Focus</span>
+                <strong class="proto-meta-val">ProtoSem Innovation Fellowship</strong>
+                <p class="proto-meta-sub">Hands-on prototyping, product engineering &amp; design thinking</p>
+              </div>
+            </div>
+
+            <div class="proto-overview-item">
+              <div class="proto-overview-icon">
+                <i data-lucide="layers"></i>
+              </div>
+              <div class="proto-overview-text">
+                <span class="proto-meta-label">Learning Domains</span>
+                <strong class="proto-meta-val">Cyber-Physical Systems</strong>
+                <p class="proto-meta-sub">Microcontrollers, circuit soldering, state machines &amp; 5S</p>
+              </div>
+            </div>
+
+            <div class="proto-overview-item">
+              <div class="proto-overview-icon">
+                <i data-lucide="calendar"></i>
+              </div>
+              <div class="proto-overview-text">
+                <span class="proto-meta-label">Journal Structure</span>
+                <strong class="proto-meta-val">Milestone-Based Records</strong>
+                <p class="proto-meta-sub">Verified weekly activities, challenges &amp; key engineering takeaways</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Navigation System -->
+        <div class="protosem-nav-wrapper">
+          <div class="protosem-controls">
+            <button class="btn btn-sm btn-secondary proto-nav-btn" id="protoPrevBtn" aria-label="Previous week">
+              <i data-lucide="chevron-left"></i> Previous Week
+            </button>
+            <div class="protosem-week-tabs" id="protoWeekTabs" role="tablist" aria-label="ProtoSem Weeks Navigation">
+              <!-- Dynamically populated from PROTOSEM_WEEKS -->
+            </div>
+            <button class="btn btn-sm btn-secondary proto-nav-btn" id="protoNextBtn" aria-label="Next week">
+              Next Week <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+          <div class="protosem-week-status" id="protoWeekStatus">
+            Active Milestone: <span id="currentWeekNumber" class="status-highlight">Week 0</span>
+          </div>
+        </div>
+
+        <!-- Main ProtoSem Interface (Desktop Split Layout) -->
+        <div class="protosem-main-card glass-panel" id="protosemMainCard">
+          
+          <!-- Left Panel: Media, Visual Representation & Gallery -->
+          <div class="protosem-media-panel">
+            <div class="featured-media-box" id="protoFeaturedMedia" aria-live="polite">
+              <!-- Dynamically populated visual graphic / SVG illustration -->
+            </div>
+
+            <div class="protosem-media-meta">
+              <div class="media-meta-row">
+                <span class="category-badge badge-primary" id="protoMetaCategory">Orientation</span>
+                <span class="status-indicator" id="protoMetaStatus">Completed</span>
+              </div>
+              <h4 class="media-meta-title" id="protoMetaTitle">Orientation &amp; Team Building</h4>
+            </div>
+
+            <!-- Activity Gallery Preview (Click to open Lightbox) -->
+            <div class="protosem-gallery-section" id="protoGallerySection">
+              <div class="gallery-header-row">
+                <h5 class="gallery-heading"><i data-lucide="images"></i> Activity &amp; Prototype Gallery</h5>
+                <span class="gallery-count-badge" id="protoGalleryCount">3 Items</span>
+              </div>
+              <div class="protosem-gallery-grid" id="protoGalleryGrid">
+                <!-- Dynamically populated thumbnails -->
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="protosem-media-actions" id="protoMediaActions">
+              <button class="btn btn-sm btn-primary btn-block" id="openProtoDetailModalBtn">
+                <i data-lucide="book-open"></i> View Full Journal Record
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Panel: Detailed Weekly Learning Record -->
+          <div class="protosem-details-panel">
+            <div class="proto-week-header">
+              <span class="proto-week-pill" id="protoWeekPill">WEEK 0</span>
+              <h3 class="proto-week-title" id="protoWeekTitle">Orientation &amp; Team Building</h3>
+              <p class="proto-week-desc" id="protoWeekDesc">
+                Started the ProtoSem journey through program orientation, team-building activities, personality assessment, and an introduction to workplace organization.
+              </p>
+            </div>
+
+            <!-- Overview Paragraph -->
+            <div class="proto-block">
+              <h4 class="proto-block-title"><i data-lucide="file-text"></i> Detailed Overview</h4>
+              <p class="proto-block-text" id="protoWeekOverview">
+                Week 0 focused on understanding the ProtoSem program and preparing for the learning journey ahead.
+              </p>
+            </div>
+
+            <!-- Learning Insights -->
+            <div class="proto-block">
+              <h4 class="proto-block-title"><i data-lucide="lightbulb"></i> Learning Insights</h4>
+              <div class="proto-insights-list" id="protoInsightsList">
+                <!-- Dynamically populated insights -->
+              </div>
+            </div>
+
+            <!-- Practical Work & Activities -->
+            <div class="proto-block">
+              <h4 class="proto-block-title"><i data-lucide="check-square"></i> Activities &amp; Practical Work</h4>
+              <ul class="proto-checklist" id="protoActivitiesList">
+                <!-- Dynamically populated activities -->
+              </ul>
+            </div>
+
+            <!-- Technologies & Methodologies (Tags) -->
+            <div class="proto-block">
+              <h4 class="proto-block-title"><i data-lucide="cpu"></i> Technologies &amp; Methodologies</h4>
+              <div class="proto-tags" id="protoTechTags">
+                <!-- Dynamically populated tags -->
+              </div>
+            </div>
+
+            <!-- Skills Learned (Chips) -->
+            <div class="proto-block">
+              <h4 class="proto-block-title"><i data-lucide="sparkles"></i> Skills Learned &amp; Practiced</h4>
+              <div class="proto-skills" id="protoSkillsTags">
+                <!-- Dynamically populated skill chips -->
+              </div>
+            </div>
+
+            <!-- Challenges & Problem Solving -->
+            <div class="proto-block proto-challenges-box" id="protoChallengeBox">
+              <h4 class="proto-block-title"><i data-lucide="alert-circle"></i> Challenges &amp; Problem-Solving</h4>
+              <p class="proto-challenge-text" id="protoChallengeText">
+                <!-- Dynamically populated challenge narrative -->
+              </p>
+            </div>
+
+            <!-- Key Takeaways -->
+            <div class="proto-block">
+              <h4 class="proto-block-title"><i data-lucide="bookmark-check"></i> Key Takeaways</h4>
+              <ul class="proto-takeaways-list" id="protoTakeawaysList">
+                <!-- Dynamically populated takeaways -->
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Experience / Journey Timeline Section -->
     <section class="section timeline-section" id="timeline">
       <div class="container">
@@ -908,6 +1083,100 @@
       <div class="modal-footer">
         <a href="#contact" class="btn btn-sm btn-primary" id="bioContactBtn">Contact Sairam</a>
         <button class="btn btn-sm btn-secondary" id="bioDoneBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ProtoSem Detailed Reflection Modal -->
+  <div class="modal-overlay" id="protoReflectionModal" aria-hidden="true" role="dialog" aria-labelledby="protoModalTitle">
+    <div class="modal-box glass-panel proto-modal-box">
+      <button class="modal-close-btn" id="protoModalCloseBtn" aria-label="Close reflection popup">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-badge-wrapper">
+          <span class="category-badge badge-primary" id="protoModalBadge">Orientation</span>
+          <span class="status-indicator" id="protoModalStatus">Completed</span>
+        </div>
+        <h2 class="modal-title" id="protoModalTitle">Week 0: Orientation &amp; Team Building</h2>
+        <p class="modal-subtitle" id="protoModalSubtitle">ProtoSem Innovation Fellowship • Weekly Learning Record</p>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="file-text"></i> Comprehensive Overview</h4>
+          <p id="protoModalOverview" class="modal-text"></p>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="lightbulb"></i> Key Learning Insights</h4>
+          <ul id="protoModalInsights" class="modal-feature-list"></ul>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="check-circle-2"></i> Practical Activities &amp; Contributions</h4>
+          <ul id="protoModalActivities" class="modal-feature-list"></ul>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="cpu"></i> Technologies &amp; Methodologies</h4>
+          <div id="protoModalTech" class="modal-tech-pills"></div>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="sparkles"></i> Skills Acquired &amp; Practiced</h4>
+          <div id="protoModalSkills" class="modal-tech-pills"></div>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="alert-triangle"></i> Challenges &amp; Resolution Approach</h4>
+          <p id="protoModalChallenges" class="modal-text"></p>
+        </div>
+
+        <div class="modal-section">
+          <h4 class="modal-section-title"><i data-lucide="bookmark-check"></i> Key Takeaways</h4>
+          <ul id="protoModalTakeaways" class="modal-feature-list"></ul>
+        </div>
+
+        <div class="modal-section proto-reflection-highlight">
+          <h4 class="modal-section-title"><i data-lucide="message-square"></i> Personal Engineering Reflection</h4>
+          <p id="protoModalReflection" class="modal-text font-italic"></p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-sm btn-secondary" id="protoModalDoneBtn">Close Record</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ProtoSem Gallery Lightbox Modal -->
+  <div class="modal-overlay proto-lightbox-overlay" id="protoLightboxModal" aria-hidden="true" role="dialog" aria-label="Image gallery viewer">
+    <div class="lightbox-container glass-panel">
+      <button class="modal-close-btn lightbox-close" id="lightboxCloseBtn" aria-label="Close image viewer">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="lightbox-content">
+        <div class="lightbox-media" id="lightboxMedia">
+          <!-- Dynamically populated visual or image -->
+        </div>
+
+        <div class="lightbox-controls">
+          <button class="btn btn-sm btn-ghost lightbox-nav-btn" id="lightboxPrevBtn" aria-label="Previous image">
+            <i data-lucide="arrow-left"></i> Previous
+          </button>
+          <div class="lightbox-counter" id="lightboxCounter">1 / 3</div>
+          <button class="btn btn-sm btn-ghost lightbox-nav-btn" id="lightboxNextBtn" aria-label="Next image">
+            Next <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="lightbox-info">
+          <h4 class="lightbox-title" id="lightboxTitle">Activity Title</h4>
+          <p class="lightbox-caption" id="lightboxCaption">Description caption of this artifact</p>
+        </div>
       </div>
     </div>
   </div>
