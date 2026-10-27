@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4: Firebase IoT Monitoring Dashboard — ProtoSem Week 07</title>
+  <meta name="description" content="Technical documentation for ESP32 environmental sensing, Firebase Realtime Database, and web dashboard during ProtoSem Week 07.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./task-details.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-task-id="task-4">
+
+  <!-- Top Navigation Bar -->
+  <nav class="task-page-nav">
+    <div class="container task-nav-container">
+      <div class="task-nav-left">
+        <a href="../../index.html" class="task-brand-link">&lt;JS/&gt; J Sairam</a>
+        <div class="task-breadcrumb">
+          <i data-lucide="chevron-right"></i>
+          <a href="../../index.html#protosem">ProtoSem</a>
+          <i data-lucide="chevron-right"></i>
+          <a href="../../index.html#protosem">Week 07</a>
+          <i data-lucide="chevron-right"></i>
+          <span style="color: var(--text-primary); font-weight: 600;">Task 4</span>
+        </div>
+      </div>
+      <div class="task-nav-right">
+        <a href="../../index.html#protosem" class="btn btn-sm btn-outline">
+          <i data-lucide="arrow-left"></i> Week 07 Overview
+        </a>
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle theme">
+          <i data-lucide="moon" class="dark-icon"></i>
+          <i data-lucide="sun" class="light-icon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header Section -->
+  <header class="task-hero-section">
+    <div class="container">
+      <div class="task-hero-meta">
+        <span class="task-milestone-pill">PROTOSEM · WEEK 07</span>
+        <span class="category-badge badge-primary">Environmental Monitoring</span>
+        <span class="status-indicator">Completed Activity</span>
+      </div>
+      <h1 class="task-hero-title">Task 4 — Firebase IoT Monitoring Dashboard</h1>
+      <p class="task-hero-desc">
+        Engineered an ESP32-based environmental monitoring and remote bulb-control system combining DHT11 and LDR sensors, Google Firebase Realtime Database, and a live web dashboard.
+      </p>
+      <div class="task-hero-tags">
+        <span class="tech-pill">ESP32</span>
+        <span class="tech-pill">DHT11 Sensor</span>
+        <span class="tech-pill">LDR Light Sensor</span>
+        <span class="tech-pill">Firebase Realtime DB</span>
+        <span class="tech-pill">Web Dashboard</span>
+        <span class="tech-pill">Relay Bulb Control</span>
+        <a href="https://github.com/JSairam2007/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" style="margin-left: auto;">
+          <i data-lucide="github"></i> View Repository
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="container">
+    <div class="task-content-layout">
+
+      <!-- Left Sidebar: Table of Contents & Checklist Widget -->
+      <aside class="task-toc-aside" aria-label="Table of Contents">
+        <div class="task-toc-header">
+          <span class="task-toc-title"><i data-lucide="list"></i> Documentation</span>
+        </div>
+        <ul class="task-toc-list">
+          <li><a href="#overview" class="task-toc-link"><span class="task-toc-num">01</span> Overview</a></li>
+          <li><a href="#concepts" class="task-toc-link"><span class="task-toc-num">02</span> Concepts</a></li>
+          <li><a href="#system-design" class="task-toc-link"><span class="task-toc-num">03</span> System Design</a></li>
+          <li><a href="#hardware-software" class="task-toc-link"><span class="task-toc-num">04</span> Hardware &amp; Software</a></li>
+          <li><a href="#wiring-setup" class="task-toc-link"><span class="task-toc-num">05</span> Wiring &amp; Setup</a></li>
+          <li><a href="#implementation" class="task-toc-link"><span class="task-toc-num">06</span> Implementation</a></li>
+          <li><a href="#configuration" class="task-toc-link"><span class="task-toc-num">07</span> Configuration</a></li>
+          <li><a href="#evidence" class="task-toc-link"><span class="task-toc-num">08</span> Evidence</a></li>
+          <li><a href="#challenges" class="task-toc-link"><span class="task-toc-num">09</span> Challenges &amp; Fixes</a></li>
+          <li><a href="#reflection" class="task-toc-link"><span class="task-toc-num">10</span> Reflection</a></li>
+          <li><a href="#repository" class="task-toc-link"><span class="task-toc-num">11</span> Repository Link</a></li>
+          <li><a href="#checklist" class="task-toc-link"><span class="task-toc-num">12</span> Activity Checklist</a></li>
+        </ul>
+
+        <div class="task-toc-progress">
+          <div class="toc-progress-label">
+            <span>Checklist Progress</span>
+            <span id="tocPercent">0%</span>
+          </div>
+          <div class="toc-progress-bar">
+            <div class="toc-progress-fill" id="tocProgressFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Main Documentation Body -->
+      <div class="task-doc-body">
+
+        <!-- Section 1 — Overview -->
+        <section class="task-doc-section" id="overview">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="file-text"></i></div>
+            <div>
+              <span class="task-section-num">Section 01</span>
+              <h2 class="task-section-title">Overview</h2>
+            </div>
+          </div>
+          <div class="task-callout">
+            <div class="task-callout-title"><i data-lucide="target"></i> Objective</div>
+            <p class="task-callout-text">
+              Understand how environmental sensor telemetry, cloud database services, and a customized web dashboard work together to provide continuous physical monitoring and remote hardware control.
+            </p>
+          </div>
+          <h3 class="task-subheading"><i data-lucide="help-circle"></i> Problem Being Addressed</h3>
+          <p class="task-text">
+            While previous tasks explored basic binary actuation, real-world IoT systems primarily gather continuous environmental analog/digital telemetry (temperature, humidity, light) and synchronize it in real-time across multiple authenticated client interfaces while enabling bidirectional control. This task addresses building a synchronized multi-client cloud interface backed by a persistent NoSQL database.
+          </p>
+          <h3 class="task-subheading"><i data-lucide="info"></i> Summary &amp; Expected Purpose</h3>
+          <p class="task-text">
+            I developed a comprehensive IoT monitoring prototype. The ESP32 continuously samples temperature and relative humidity from a DHT11 sensor and ambient illumination from an LDR light sensor. Telemetry is streamed over Wi-Fi directly into Google Firebase Realtime Database. A custom web dashboard listens to the database nodes in real-time, visualizes live telemetry gauges, and provides an authenticated toggle to switch an electrical bulb via an isolated relay.
+          </p>
+        </section>
+
+        <!-- Section 2 — Concepts -->
+        <section class="task-doc-section" id="concepts">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="book-open"></i></div>
+            <div>
+              <span class="task-section-num">Section 02</span>
+              <h2 class="task-section-title">Concepts</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            This activity incorporates fundamental concepts of cloud architecture, databases, security, and physical sensing:
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="cloud"></i> Cloud Computing Models: IaaS, PaaS, SaaS &amp; BaaS</h3>
+          <ul class="task-text" style="padding-left: 1.5rem;">
+            <li><strong>IaaS (Infrastructure as a Service):</strong> Raw virtualized hardware resources (servers, storage, networking) such as AWS EC2 or Google Compute Engine.</li>
+            <li><strong>PaaS (Platform as a Service):</strong> Managed execution environment where developers deploy code without server management (e.g., Heroku, Google App Engine).</li>
+            <li><strong>SaaS (Software as a Service):</strong> End-user web applications delivered over the internet (e.g., Gmail, Google Drive, Microsoft 365).</li>
+            <li><strong>BaaS (Backend as a Service):</strong> Cloud services providing pre-built backend capabilities—such as user authentication, realtime databases, and push notifications—via client SDKs. <em>Google Firebase is a quintessential BaaS.</em></li>
+          </ul>
+
+          <h3 class="task-subheading"><i data-lucide="database"></i> What a Cloud Database Is &amp; Firebase Realtime Database</h3>
+          <p class="task-text">
+            Unlike relational SQL databases relying on rigid tabular schemas, Firebase Realtime Database is a cloud-hosted NoSQL database where all data is stored as a giant hierarchical JSON tree. When any client updates a key, all connected clients receive the update in real-time via persistent WebSockets without polling.
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="shield-check"></i> Authentication vs Authorization</h3>
+          <p class="task-text">
+            <strong>Authentication (AuthN)</strong> verifies identity ("who are you?") using credentials such as email and password. <strong>Authorization (AuthZ)</strong> determines permissions ("what are you allowed to do?") using security rules that restrict who can read or write specific database paths.
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="thermometer"></i> Environmental Sensing: DHT11 &amp; LDR</h3>
+          <ul class="task-text" style="padding-left: 1.5rem;">
+            <li><strong>DHT11:</strong> Capacitive humidity sensor and thermistor with custom single-wire digital serial transmission.</li>
+            <li><strong>LDR (Light Dependent Resistor):</strong> Photoresistor whose electrical resistance decreases as incident light increases, read via an ADC voltage divider circuit.</li>
+          </ul>
+        </section>
+
+        <!-- Section 3 — System Design -->
+        <section class="task-doc-section" id="system-design">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="git-merge"></i></div>
+            <div>
+              <span class="task-section-num">Section 03</span>
+              <h2 class="task-section-title">System Design</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The system separates continuous telemetry monitoring from on-demand remote actuation:
+          </p>
+
+          <div class="task-diagram-box">
+            <div class="task-diagram-header"><i data-lucide="activity"></i> 1. Environmental Telemetry Monitoring Flow</div>
+            <div class="task-workflow-row">
+              <div class="task-wf-node"><span class="task-wf-node-badge">1</span> DHT11 &amp; LDR Sensors</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">2</span> ESP32 Microcontroller</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">3</span> Firebase Realtime DB</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">4</span> Web Monitoring Dashboard</div>
+            </div>
+
+            <div class="task-diagram-header" style="margin-top: 1.25rem;"><i data-lucide="toggle-right"></i> 2. Remote Actuation Flow</div>
+            <div class="task-workflow-row">
+              <div class="task-wf-node"><span class="task-wf-node-badge">1</span> Dashboard Toggle</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">2</span> Firebase Database Node</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">3</span> ESP32 Stream Listener</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">4</span> Relay / Bulb Control</div>
+            </div>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="folder-tree"></i> Firebase Realtime Database Structure</h3>
+          <div class="task-code-wrapper">
+            <pre class="task-code-block"><code>{
+  "environment": {
+    "temperature": 27.5,
+    "humidity": 65.0,
+    "lightLevel": 780,
+    "lastUpdated": 1711538400
+  },
+  "controls": {
+    "bulbStatus": true
+  }
+}</code></pre>
+          </div>
+        </section>
+
+        <!-- Section 4 — Hardware & Software -->
+        <section class="task-doc-section" id="hardware-software">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="cpu"></i></div>
+            <div>
+              <span class="task-section-num">Section 04</span>
+              <h2 class="task-section-title">Hardware &amp; Software</h2>
+            </div>
+          </div>
+
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Domain</th>
+                  <th>Purpose &amp; Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ESP32 Board</strong></td>
+                  <td>Microcontroller</td>
+                  <td>Processes analog/digital sensor readings and runs Firebase client engine.</td>
+                </tr>
+                <tr>
+                  <td><strong>DHT11 Sensor</strong></td>
+                  <td>Sensor</td>
+                  <td>Digital relative humidity (20–90%) and temperature (0–50°C) sensing.</td>
+                </tr>
+                <tr>
+                  <td><strong>LDR Photoresistor &amp; 10kΩ Resistor</strong></td>
+                  <td>Sensor</td>
+                  <td>Analog light detection forming a voltage divider to measure ambient lux.</td>
+                </tr>
+                <tr>
+                  <td><strong>5V Relay Module &amp; Bulb</strong></td>
+                  <td>Actuator</td>
+                  <td>Optoisolated electromagnetic relay switching an electrical load/bulb.</td>
+                </tr>
+                <tr>
+                  <td><strong>Google Firebase</strong></td>
+                  <td>Cloud Backend</td>
+                  <td>Realtime Database and Authentication services.</td>
+                </tr>
+                <tr>
+                  <td><strong>Web Dashboard</strong></td>
+                  <td>Frontend UI</td>
+                  <td>HTML5/CSS3/JavaScript responsive web interface utilizing Firebase Web SDK.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 5 — Wiring / Setup -->
+        <section class="task-doc-section" id="wiring-setup">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="git-commit"></i></div>
+            <div>
+              <span class="task-section-num">Section 05</span>
+              <h2 class="task-section-title">Wiring &amp; Setup</h2>
+            </div>
+          </div>
+
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>ESP32 Pin</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DHT11 DATA Pin</td>
+                  <td><code>GPIO 4</code></td>
+                  <td>Bidirectional single-wire digital signal with 10kΩ pull-up resistor.</td>
+                </tr>
+                <tr>
+                  <td>DHT11 VCC / GND</td>
+                  <td><code>3.3V</code> / <code>GND</code></td>
+                  <td>Sensor power supply lines.</td>
+                </tr>
+                <tr>
+                  <td>LDR Voltage Divider Output</td>
+                  <td><code>GPIO 34</code> (ADC1_CH6)</td>
+                  <td>Analog input reading voltage variations proportional to ambient light.</td>
+                </tr>
+                <tr>
+                  <td>Relay IN Pin</td>
+                  <td><code>GPIO 26</code></td>
+                  <td>Digital control signal driving relay transistor coil (Active LOW/HIGH).</td>
+                </tr>
+                <tr>
+                  <td>Relay VCC / GND</td>
+                  <td><code>5V (VIN)</code> / <code>GND</code></td>
+                  <td>Provides 5V coil power to prevent microcontroller reset under load.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 6 — Implementation -->
+        <section class="task-doc-section" id="implementation">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="code-2"></i></div>
+            <div>
+              <span class="task-section-num">Section 06</span>
+              <h2 class="task-section-title">Implementation</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Below is the core firmware utilizing the <code>FirebaseESP32</code> library:
+          </p>
+
+          <div class="task-code-wrapper">
+            <div class="task-code-header">
+              <span class="task-code-lang"><i data-lucide="file-code"></i> ESP32_Firebase_Monitoring.ino</span>
+              <button class="btn btn-sm btn-ghost task-copy-code-btn"><i data-lucide="copy"></i> Copy Code</button>
+            </div>
+            <pre class="task-code-block"><code>#include &lt;WiFi.h&gt;
+#include &lt;FirebaseESP32.h&gt;
+#include &lt;DHT.h&gt;
+
+#define WIFI_SSID       "YOUR_WIFI_SSID"
+#define WIFI_PASSWORD   "YOUR_WIFI_PASSWORD"
+#define FIREBASE_HOST   "YOUR_PROJECT_ID-default-rtdb.firebaseio.com"
+#define FIREBASE_AUTH   "YOUR_FIREBASE_DATABASE_SECRET"
+
+#define DHTPIN          4
+#define DHTTYPE         DHT11
+#define LDRPIN          34
+#define RELAYPIN        26
+
+DHT dht(DHTPIN, DHTTYPE);
+FirebaseData fbdo;
+FirebaseAuth auth;
+FirebaseConfig config;
+
+unsigned long lastSend = 0;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(RELAYPIN, OUTPUT);
+  digitalWrite(RELAYPIN, LOW);
+  dht.begin();
+
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi Connected!");
+
+  config.host = FIREBASE_HOST;
+  config.signer.tokens.legacy_token = FIREBASE_AUTH;
+  Firebase.begin(&config, &auth);
+  Firebase.reconnectWiFi(true);
+}
+
+void loop() {
+  // Push environmental telemetry every 3 seconds
+  if (millis() - lastSend > 3000) {
+    lastSend = millis();
+
+    float temp = dht.readTemperature();
+    float hum = dht.readHumidity();
+    int light = analogRead(LDRPIN);
+
+    if (!isnan(temp) && !isnan(hum)) {
+      Firebase.setFloat(fbdo, "/environment/temperature", temp);
+      Firebase.setFloat(fbdo, "/environment/humidity", hum);
+      Firebase.setInt(fbdo, "/environment/lightLevel", light);
+      Serial.printf("Published: T=%.1fC, H=%.1f%%, L=%d\n", temp, hum, light);
+    }
+  }
+
+  // Check remote bulb control state from database
+  if (Firebase.getBool(fbdo, "/controls/bulbStatus")) {
+    bool bulbOn = fbdo.boolData();
+    digitalWrite(RELAYPIN, bulbOn ? HIGH : LOW);
+  }
+}</code></pre>
+          </div>
+        </section>
+
+        <!-- Section 7 — Configuration -->
+        <section class="task-doc-section" id="configuration">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="settings"></i></div>
+            <div>
+              <span class="task-section-num">Section 07</span>
+              <h2 class="task-section-title">Configuration</h2>
+            </div>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="shield"></i> Firebase Project Setup Guide</h3>
+          <ol class="task-text" style="padding-left: 1.5rem;">
+            <li>Go to <strong>console.firebase.google.com</strong> and create a new project.</li>
+            <li>In the left sidebar, navigate to <strong>Build &gt; Realtime Database</strong>. Click <em>Create Database</em>.</li>
+            <li>Select your database location and start in <em>Test Mode</em> for initial prototyping.</li>
+            <li>Set secure database rules:
+              <div class="task-code-wrapper" style="margin: 0.5rem 0;">
+                <pre class="task-code-block"><code>{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}</code></pre>
+              </div>
+            </li>
+            <li>Under <strong>Authentication</strong>, enable <em>Email/Password</em> sign-in for the web dashboard.</li>
+            <li>Copy your Project API Key and Database URL into your local configuration file.</li>
+          </ol>
+        </section>
+
+        <!-- Section 8 — Evidence -->
+        <section class="task-doc-section" id="evidence">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="image"></i></div>
+            <div>
+              <span class="task-section-num">Section 08</span>
+              <h2 class="task-section-title">Evidence</h2>
+            </div>
+          </div>
+
+          <div class="task-evidence-grid">
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="lock"></i></div>
+                <span class="task-evidence-filename">firebase-login-interface.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Authentication View:</strong> User login page protecting the monitoring dashboard.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="database"></i></div>
+                <span class="task-evidence-filename">firebase-realtime-database-tree.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Database Console:</strong> Structured JSON tree reflecting live telemetry and control nodes.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="layout"></i></div>
+                <span class="task-evidence-filename">web-monitoring-dashboard.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Web Dashboard:</strong> Gauges displaying real-time temperature, humidity, and relay status toggle.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="cpu"></i></div>
+                <span class="task-evidence-filename">hardware-sensor-setup.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Hardware Prototype:</strong> Breadboard setup with ESP32, DHT11, LDR divider, and relay.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 9 — Challenges & Fixes -->
+        <section class="task-doc-section" id="challenges">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="alert-triangle"></i></div>
+            <div>
+              <span class="task-section-num">Section 09</span>
+              <h2 class="task-section-title">Challenges &amp; Fixes</h2>
+            </div>
+          </div>
+
+          <div class="task-trouble-card">
+            <div class="task-trouble-step">
+              <span class="task-trouble-label problem"><i data-lucide="alert-circle"></i> Problem</span>
+              <span class="task-trouble-val">DHT11 frequently returned <code>NaN</code> (Not a Number) for temperature and humidity.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label"><i data-lucide="search"></i> Investigation</span>
+              <span class="task-trouble-val">The DHT11 sensor requires at least 1–2 seconds between consecutive read requests. The loop was querying the sensor too fast.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label solution"><i data-lucide="check"></i> Solution</span>
+              <span class="task-trouble-val">Enforced non-blocking 3-second sampling interval using <code>millis() - lastSend > 3000</code>.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label outcome"><i data-lucide="award"></i> Outcome</span>
+              <span class="task-trouble-val">Accurate, reliable telemetry reads without stalling system responsiveness.</span>
+            </div>
+          </div>
+
+          <div class="task-trouble-card">
+            <div class="task-trouble-step">
+              <span class="task-trouble-label problem"><i data-lucide="alert-circle"></i> Problem</span>
+              <span class="task-trouble-val">ESP32 reset unexpectedly when the relay switched on.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label"><i data-lucide="search"></i> Investigation</span>
+              <span class="task-trouble-val">Electromagnetic inrush current and inductive kickback from the relay coil caused a 3.3V rail voltage brownout.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label solution"><i data-lucide="check"></i> Solution</span>
+              <span class="task-trouble-val">Powered the relay module from the 5V (VIN) rail and added a decoupling capacitor across power rails.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label outcome"><i data-lucide="award"></i> Outcome</span>
+              <span class="task-trouble-val">Completely stable switching behavior with no brownout resets.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 10 — Reflection -->
+        <section class="task-doc-section" id="reflection">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="message-square"></i></div>
+            <div>
+              <span class="task-section-num">Section 10</span>
+              <h2 class="task-section-title">Reflection</h2>
+            </div>
+          </div>
+          <div class="task-callout">
+            <p class="task-callout-text font-italic" style="font-size: 0.95rem;">
+              "This activity helped me understand how environmental sensors can provide continuous information to a connected system and how cloud services like Firebase support monitoring through a web dashboard. I also explored the relationship between sensor inputs and remote hardware control, bridging physical analog signals into real-time digital dashboards."
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 11 — Repository Link -->
+        <section class="task-doc-section" id="repository">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="github"></i></div>
+            <div>
+              <span class="task-section-num">Section 11</span>
+              <h2 class="task-section-title">Repository Link</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Source code for the ESP32 firmware and web dashboard are maintained in the GitHub repository:
+          </p>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/JSairam2007/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <i data-lucide="github"></i> View Source Code on GitHub
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 12 — Activity-Specific Checklist -->
+        <section class="task-doc-section" id="checklist">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="check-square"></i></div>
+            <div>
+              <span class="task-section-num">Section 12</span>
+              <h2 class="task-section-title">Activity Checklist</h2>
+            </div>
+          </div>
+
+          <div class="task-checklist-box">
+            <div class="task-checklist-summary">
+              <span class="task-checklist-count" id="checklistCount">0 of 27 Completed</span>
+              <span class="category-badge badge-primary" id="checklistPercent">0%</span>
+            </div>
+            <ul class="task-checklist-items">
+              <li class="task-check-item"><input type="checkbox" checked><span>Objective of the Firebase IoT monitoring system.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Basic concept of cloud computing.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>IaaS, PaaS, SaaS, and BaaS explained.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>What a cloud platform is.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>What a database is.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Firebase Realtime Database explained.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>What a cloud-based dashboard is.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Authentication and the purpose of a login system.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Difference between authentication and authorization.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Firebase project setup documented.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Firebase Authentication configuration documented.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Realtime Database structure documented.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Database/data-flow architecture.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>DHT11 sensor connection documented.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Temperature and humidity data displayed on the dashboard.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>LDR sensor and its purpose documented.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Bulb ON/OFF control from the dashboard implemented.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Communication flow between ESP32, Firebase, and dashboard.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Complete ESP32 source code.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Complete dashboard source code.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Screenshots of the login page.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Screenshots of the Firebase database.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Screenshots of the working dashboard.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Photographs of the physical prototype.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Video demonstrating monitoring and control.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Problems encountered and their solutions.</span></li>
+              <li class="task-check-item"><input type="checkbox" checked><span>Brief reflection on the assignment.</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="task-bottom-nav" aria-label="Activity Navigation">
+          <a href="./task-3.html" class="task-nav-direction-btn">
+            <i data-lucide="arrow-left"></i> Previous: Task 3 (IFTTT Automation)
+          </a>
+          <a href="../../index.html#protosem" class="btn btn-outline">
+            <i data-lucide="grid"></i> Week 07 Overview
+          </a>
+          <a href="./task-5.html" class="task-nav-direction-btn">
+            Next: Task 5 (Logging &amp; Export) <i data-lucide="arrow-right"></i>
+          </a>
+        </nav>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="footer-logo">&lt;JS/&gt; J Sairam</span>
+        <p class="footer-copy">Student at Kumaraguru College of Technology. ProtoSem Innovation Fellowship Journal.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#overview" class="back-to-top">
+          Back to Top <i data-lucide="arrow-up"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./task-details.js"></script>
+</body>
+</html>

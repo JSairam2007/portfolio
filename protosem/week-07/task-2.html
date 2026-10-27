@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2: Adafruit IO Dashboard &amp; MQTT — ProtoSem Week 07</title>
+  <meta name="description" content="Technical documentation for Adafruit IO Dashboard & MQTT remote device control during ProtoSem Week 07 internship.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./task-details.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-task-id="task-2">
+
+  <!-- Top Navigation Bar -->
+  <nav class="task-page-nav">
+    <div class="container task-nav-container">
+      <div class="task-nav-left">
+        <a href="../../index.html" class="task-brand-link">&lt;JS/&gt; J Sairam</a>
+        <div class="task-breadcrumb">
+          <i data-lucide="chevron-right"></i>
+          <a href="../../index.html#protosem">ProtoSem</a>
+          <i data-lucide="chevron-right"></i>
+          <a href="../../index.html#protosem">Week 07</a>
+          <i data-lucide="chevron-right"></i>
+          <span style="color: var(--text-primary); font-weight: 600;">Task 2</span>
+        </div>
+      </div>
+      <div class="task-nav-right">
+        <a href="../../index.html#protosem" class="btn btn-sm btn-outline">
+          <i data-lucide="arrow-left"></i> Week 07 Overview
+        </a>
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle theme">
+          <i data-lucide="moon" class="dark-icon"></i>
+          <i data-lucide="sun" class="light-icon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header Section -->
+  <header class="task-hero-section">
+    <div class="container">
+      <div class="task-hero-meta">
+        <span class="task-milestone-pill">PROTOSEM · WEEK 07</span>
+        <span class="category-badge badge-primary">Cloud-Based IoT Control</span>
+        <span class="status-indicator">Completed Activity</span>
+      </div>
+      <h1 class="task-hero-title">Task 2 — Adafruit IO Dashboard &amp; MQTT</h1>
+      <p class="task-hero-desc">
+        Extended the local ESP32 web-control concept into a scalable, cloud-connected IoT architecture using Adafruit IO dashboards and lightweight MQTT publish-subscribe messaging.
+      </p>
+      <div class="task-hero-tags">
+        <span class="tech-pill">ESP32</span>
+        <span class="tech-pill">Adafruit IO</span>
+        <span class="tech-pill">MQTT Protocol</span>
+        <span class="tech-pill">Arduino IDE</span>
+        <span class="tech-pill">Cloud Dashboards</span>
+        <span class="tech-pill">Pub/Sub</span>
+        <a href="https://github.com/JSairam2007/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" style="margin-left: auto;">
+          <i data-lucide="github"></i> View Repository
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="container">
+    <div class="task-content-layout">
+
+      <!-- Left Sidebar: Table of Contents & Checklist Widget -->
+      <aside class="task-toc-aside" aria-label="Table of Contents">
+        <div class="task-toc-header">
+          <span class="task-toc-title"><i data-lucide="list"></i> Documentation</span>
+        </div>
+        <ul class="task-toc-list">
+          <li><a href="#overview" class="task-toc-link"><span class="task-toc-num">01</span> Overview</a></li>
+          <li><a href="#concepts" class="task-toc-link"><span class="task-toc-num">02</span> Concepts</a></li>
+          <li><a href="#system-design" class="task-toc-link"><span class="task-toc-num">03</span> System Design</a></li>
+          <li><a href="#hardware-software" class="task-toc-link"><span class="task-toc-num">04</span> Hardware &amp; Software</a></li>
+          <li><a href="#wiring-setup" class="task-toc-link"><span class="task-toc-num">05</span> Wiring &amp; Setup</a></li>
+          <li><a href="#implementation" class="task-toc-link"><span class="task-toc-num">06</span> Implementation</a></li>
+          <li><a href="#configuration" class="task-toc-link"><span class="task-toc-num">07</span> Configuration</a></li>
+          <li><a href="#evidence" class="task-toc-link"><span class="task-toc-num">08</span> Evidence</a></li>
+          <li><a href="#challenges" class="task-toc-link"><span class="task-toc-num">09</span> Challenges &amp; Fixes</a></li>
+          <li><a href="#reflection" class="task-toc-link"><span class="task-toc-num">10</span> Reflection</a></li>
+          <li><a href="#repository" class="task-toc-link"><span class="task-toc-num">11</span> Repository Link</a></li>
+          <li><a href="#checklist" class="task-toc-link"><span class="task-toc-num">12</span> Activity Checklist</a></li>
+        </ul>
+
+        <div class="task-toc-progress">
+          <div class="toc-progress-label">
+            <span>Checklist Progress</span>
+            <span id="tocPercent">0%</span>
+          </div>
+          <div class="toc-progress-bar">
+            <div class="toc-progress-fill" id="tocProgressFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Main Documentation Body -->
+      <div class="task-doc-body">
+
+        <!-- Section 1 — Overview -->
+        <section class="task-doc-section" id="overview">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="file-text"></i></div>
+            <div>
+              <span class="task-section-num">Section 01</span>
+              <h2 class="task-section-title">Overview</h2>
+            </div>
+          </div>
+          <div class="task-callout">
+            <div class="task-callout-title"><i data-lucide="target"></i> Objective</div>
+            <p class="task-callout-text">
+              Understand how a centralized cloud dashboard can communicate bidirectionally with an ESP32 microcontroller using the MQTT protocol, supporting remote hardware actuation and telemetry synchronization.
+            </p>
+          </div>
+          <h3 class="task-subheading"><i data-lucide="help-circle"></i> Problem Being Addressed</h3>
+          <p class="task-text">
+            While Task 1 proved local hardware actuation, local web servers suffer from critical architectural constraints: the controlling browser must be on the exact same local Wi-Fi subnet. Devices hidden behind home NAT firewalls or cellular modems cannot be contacted from the wider internet without complex, insecure port-forwarding or dynamic DNS configurations. Task 2 addresses this constraint by introducing a centralized cloud broker that decouples the sender and receiver.
+          </p>
+          <h3 class="task-subheading"><i data-lucide="info"></i> Summary &amp; Expected Purpose</h3>
+          <p class="task-text">
+            I connected the ESP32 to the Adafruit IO cloud platform using the MQTT protocol. Adafruit IO hosts a graphical cloud dashboard with switch widgets and telemetry feeds. When a user toggles a switch on the dashboard, Adafruit IO publishes an MQTT message to the topic feed. The ESP32, which maintains a persistent lightweight TCP connection to the cloud broker, receives the incoming packet instantly and actuates its GPIO output pin.
+          </p>
+        </section>
+
+        <!-- Section 2 — Concepts -->
+        <section class="task-doc-section" id="concepts">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="book-open"></i></div>
+            <div>
+              <span class="task-section-num">Section 02</span>
+              <h2 class="task-section-title">Concepts</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Transitioning from direct HTTP to cloud-based publish-subscribe architectures introduces several core IoT concepts:
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="cloud"></i> Role of Adafruit IO in IoT</h3>
+          <p class="task-text">
+            Adafruit IO is an open cloud service designed specifically for Internet of Things projects. It provides managed MQTT and REST endpoints, feed databases for time-series logging, and modular UI dashboard blocks (toggles, gauges, sliders, line charts).
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="radio"></i> MQTT Protocol: Broker, Publisher &amp; Subscriber</h3>
+          <p class="task-text">
+            MQTT (Message Queuing Telemetry Transport) is a lightweight publish-subscribe messaging transport protocol designed for constrained devices with limited bandwidth and battery power:
+          </p>
+          <ul class="task-text" style="padding-left: 1.5rem;">
+            <li><strong>Broker:</strong> Central server (<code>io.adafruit.com</code>) that routes incoming messages to interested clients.</li>
+            <li><strong>Publisher:</strong> Any entity sending data to a named topic (e.g., the cloud dashboard publishing an ON state).</li>
+            <li><strong>Subscriber:</strong> Any entity listening to a topic (e.g., the ESP32 listening for state transitions).</li>
+          </ul>
+
+          <h3 class="task-subheading"><i data-lucide="tag"></i> MQTT Topics &amp; Feeds</h3>
+          <p class="task-text">
+            Messages are organized into hierarchical slash-delimited strings called topics. In Adafruit IO, each feed maps directly to an MQTT topic formatted as <code>username/feeds/feed-name</code> (e.g., <code>sairam/feeds/led-control</code>). Clients can subscribe to one or multiple feeds simultaneously.
+          </p>
+        </section>
+
+        <!-- Section 3 — System Design -->
+        <section class="task-doc-section" id="system-design">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="git-merge"></i></div>
+            <div>
+              <span class="task-section-num">Section 03</span>
+              <h2 class="task-section-title">System Design</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The architecture shifts from point-to-point HTTP to broker-mediated pub/sub messaging:
+          </p>
+
+          <div class="task-diagram-box">
+            <div class="task-diagram-header"><i data-lucide="git-branch"></i> Primary Cloud Actuation Flow</div>
+            <div class="task-workflow-row">
+              <div class="task-wf-node"><span class="task-wf-node-badge">1</span> Adafruit IO Dashboard</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">2</span> MQTT Message (Topic Feed)</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">3</span> ESP32 Microcontroller</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">4</span> GPIO Pin Actuation</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">5</span> Hardware Response (LED)</div>
+            </div>
+            <div class="task-callout" style="margin: 0.75rem 0 0 0; padding: 0.75rem 1rem;">
+              <div class="task-callout-title" style="font-size: 0.8rem;"><i data-lucide="arrow-left-right"></i> Bidirectional Telemetry Loop</div>
+              <p class="task-callout-text" style="font-size: 0.82rem;">
+                When supported by firmware, the ESP32 can also act as an MQTT Publisher, broadcasting sensor values or confirmation ACKs back to a telemetry feed (e.g., <code>username/feeds/device-status</code>) so the cloud dashboard always reflects physical reality.
+              </p>
+            </div>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="layers"></i> Component Roles in Pub/Sub Architecture</h3>
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Role</th>
+                  <th>Communication Function</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Cloud Dashboard</strong></td>
+                  <td>User Interface &amp; Publisher</td>
+                  <td>Provides interactive toggle controls rendered over HTTPS; publishes state changes to feed.</td>
+                </tr>
+                <tr>
+                  <td><strong>Adafruit IO Broker</strong></td>
+                  <td>MQTT Broker (Port 1883/8883)</td>
+                  <td>Maintains feed history, enforces authentication, and distributes payloads to subscribers.</td>
+                </tr>
+                <tr>
+                  <td><strong>ESP32 Client</strong></td>
+                  <td>Subscriber / Actuator</td>
+                  <td>Maintains outbound TCP keep-alive connection, decodes incoming packets, and drives GPIO pins.</td>
+                </tr>
+                <tr>
+                  <td><strong>LED Circuit</strong></td>
+                  <td>Physical Hardware</td>
+                  <td>Physically switches state according to cloud instructions with zero port forwarding required.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 4 — Hardware & Software -->
+        <section class="task-doc-section" id="hardware-software">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="cpu"></i></div>
+            <div>
+              <span class="task-section-num">Section 04</span>
+              <h2 class="task-section-title">Hardware &amp; Software</h2>
+            </div>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="check-circle-2"></i> Verified Component Manifest</h3>
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Component / Tool</th>
+                  <th>Category</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ESP32 Development Board</strong></td>
+                  <td>Hardware / Microcontroller</td>
+                  <td>Main embedded computation unit running MQTT client firmware.</td>
+                </tr>
+                <tr>
+                  <td><strong>5mm LED &amp; 220Ω Resistor</strong></td>
+                  <td>Actuator</td>
+                  <td>Connected to GPIO 2 to visualize remote actuation.</td>
+                </tr>
+                <tr>
+                  <td><strong>Adafruit IO Platform</strong></td>
+                  <td>Cloud Platform</td>
+                  <td>Hosts broker, user feed storage, and web UI toggle dashboard.</td>
+                </tr>
+                <tr>
+                  <td><strong>Arduino IDE</strong></td>
+                  <td>Development Tool</td>
+                  <td>Firmware editing, compiling, and serial debugging output.</td>
+                </tr>
+                <tr>
+                  <td><strong>Adafruit_MQTT Library</strong></td>
+                  <td>Software Library</td>
+                  <td>Lightweight C++ library managing MQTT packet framing, connect handshakes, and subscription callbacks.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 5 — Wiring / Setup -->
+        <section class="task-doc-section" id="wiring-setup">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="git-commit"></i></div>
+            <div>
+              <span class="task-section-num">Section 05</span>
+              <h2 class="task-section-title">Wiring &amp; Setup</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The physical hardware circuit utilizes the same safe, reliable GPIO pin configuration verified in Task 1, paired with cloud-side account setup:
+          </p>
+
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>ESP32 Pin</th>
+                  <th>Component Lead</th>
+                  <th>Electrical Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>GPIO 2</code></td>
+                  <td>LED Anode (Long Lead)</td>
+                  <td>Digital Logic Output (3.3V)</td>
+                </tr>
+                <tr>
+                  <td>LED Cathode</td>
+                  <td>220Ω Resistor Lead 1</td>
+                  <td>Current Limiting</td>
+                </tr>
+                <tr>
+                  <td>220Ω Resistor Lead 2</td>
+                  <td>ESP32 <code>GND</code></td>
+                  <td>Ground Return Path</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="cloud"></i> Cloud Account &amp; Feed Setup Flow</h3>
+          <ol class="task-text" style="padding-left: 1.5rem;">
+            <li>Create an account at <code>io.adafruit.com</code>.</li>
+            <li>Navigate to <strong>Feeds &gt; View All &gt; New Feed</strong>. Create a feed named <code>led-control</code>.</li>
+            <li>Navigate to <strong>Dashboards &gt; New Dashboard</strong>. Name it <code>IoT Control Dashboard</code>.</li>
+            <li>Add a <strong>Toggle Block</strong> linked to the <code>led-control</code> feed. Set ON value to <code>1</code> (or <code>ON</code>) and OFF value to <code>0</code> (or <code>OFF</code>).</li>
+            <li>Click the yellow key icon in Adafruit IO to retrieve your <code>AIO_USERNAME</code> and <code>AIO_KEY</code>.</li>
+          </ol>
+        </section>
+
+        <!-- Section 6 — Implementation -->
+        <section class="task-doc-section" id="implementation">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="code-2"></i></div>
+            <div>
+              <span class="task-section-num">Section 06</span>
+              <h2 class="task-section-title">Implementation</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Below is the complete C++ firmware using the official <code>Adafruit_MQTT_Client</code> library:
+          </p>
+
+          <div class="task-code-wrapper">
+            <div class="task-code-header">
+              <span class="task-code-lang"><i data-lucide="file-code"></i> ESP32_AdafruitIO_MQTT.ino</span>
+              <button class="btn btn-sm btn-ghost task-copy-code-btn"><i data-lucide="copy"></i> Copy Code</button>
+            </div>
+            <pre class="task-code-block"><code>#include &lt;WiFi.h&gt;
+#include "Adafruit_MQTT.h"
+#include "Adafruit_MQTT_Client.h"
+
+// Wi-Fi Configuration
+#define WLAN_SSID       "YOUR_WIFI_SSID"
+#define WLAN_PASS       "YOUR_WIFI_PASSWORD"
+
+// Adafruit IO Broker Configuration
+#define AIO_SERVER      "io.adafruit.com"
+#define AIO_SERVERPORT  1883
+#define AIO_USERNAME    "YOUR_AIO_USERNAME"
+#define AIO_KEY         "YOUR_AIO_KEY"
+
+// Pin definition
+const int ledPin = 2;
+
+// Create Wi-Fi and MQTT Client instances
+WiFiClient client;
+Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_KEY);
+
+// Setup subscription feed for 'led-control'
+Adafruit_MQTT_Subscribe ledControl = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/led-control");
+
+// Helper function to maintain MQTT broker connection
+void MQTT_connect();
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
+
+  // Connect to Wi-Fi
+  Serial.print("Connecting to Wi-Fi ");
+  WiFi.begin(WLAN_SSID, WLAN_PASS);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi connected! IP: " + WiFi.localIP().toString());
+
+  // Subscribe to the Adafruit IO feed
+  mqtt.subscribe(&ledControl);
+}
+
+void loop() {
+  // Ensure MQTT connection is active
+  MQTT_connect();
+
+  // Read subscription packets with 5000ms timeout
+  Adafruit_MQTT_Subscribe *subscription;
+  while ((subscription = mqtt.readSubscription(5000))) {
+    if (subscription == &ledControl) {
+      Serial.print("Received MQTT Feed Update: ");
+      char *payload = (char *)ledControl.lastread;
+      Serial.println(payload);
+
+      // Actuate hardware based on payload string
+      if (strcmp(payload, "1") == 0 || strcmp(payload, "ON") == 0) {
+        digitalWrite(ledPin, HIGH);
+        Serial.println("Action: LED switched ON");
+      } 
+      else if (strcmp(payload, "0") == 0 || strcmp(payload, "OFF") == 0) {
+        digitalWrite(ledPin, LOW);
+        Serial.println("Action: LED switched OFF");
+      }
+    }
+  }
+
+  // Ping broker to maintain keep-alive
+  if (!mqtt.ping()) {
+    mqtt.disconnect();
+  }
+}
+
+// Function to handle connection and automatic reconnections
+void MQTT_connect() {
+  int8_t ret;
+  if (mqtt.connected()) return;
+
+  Serial.print("Connecting to Adafruit IO MQTT Broker... ");
+  uint8_t retries = 3;
+
+  while ((ret = mqtt.connect()) != 0) {
+    Serial.println(mqtt.connectErrorString(ret));
+    Serial.println("Retrying connection in 5 seconds...");
+    mqtt.disconnect();
+    delay(5000);
+    retries--;
+    if (retries == 0) {
+      Serial.println("Failed to connect after retries. Pausing.");
+      while (1);
+    }
+  }
+  Serial.println("MQTT Broker Connected!");
+}</code></pre>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="check"></i> How Communication Works</h3>
+          <ul class="task-text" style="padding-left: 1.5rem;">
+            <li><strong>Keep-Alive Persistence:</strong> The ESP32 maintains an open TCP socket using <code>mqtt.ping()</code>, preventing intermediate NAT routers from closing the tunnel.</li>
+            <li><strong>Non-Blocking Event Listening:</strong> <code>mqtt.readSubscription(5000)</code> listens for incoming broker packets without flooding the processor.</li>
+            <li><strong>Payload Processing:</strong> Incoming text payloads (<code>"1"</code> or <code>"0"</code>) are compared using <code>strcmp()</code>, triggering immediate GPIO writes.</li>
+          </ul>
+        </section>
+
+        <!-- Section 7 — Configuration -->
+        <section class="task-doc-section" id="configuration">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="settings"></i></div>
+            <div>
+              <span class="task-section-num">Section 07</span>
+              <h2 class="task-section-title">Configuration</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Follow these configuration steps to authenticate with Adafruit IO:
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="shield-check"></i> Credential Security Best Practices</h3>
+          <p class="task-text">
+            Never commit raw credentials to version control. In our repository sketches, credentials are parameterized as:
+          </p>
+          <div class="task-code-wrapper" style="margin: 0.5rem 0 1.25rem;">
+            <pre class="task-code-block"><code>// Sensitive credentials configured via config.h or environment variables
+#define AIO_USERNAME    "YOUR_AIO_USERNAME"
+#define AIO_KEY         "YOUR_AIO_KEY"</code></pre>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="sliders"></i> Setup Checklist</h3>
+          <ol class="task-text" style="padding-left: 1.5rem;">
+            <li>Install <code>Adafruit MQTT Library</code> via Arduino IDE Library Manager.</li>
+            <li>Confirm your Adafruit IO username is exact (case-sensitive).</li>
+            <li>Verify feed name: Adafruit IO generates an internal slug like <code>led-control</code> even if you entered "LED Control". Always use the slug.</li>
+            <li>Open Serial Monitor at <code>115200 baud</code> to confirm successful broker authentication.</li>
+          </ol>
+        </section>
+
+        <!-- Section 8 — Evidence -->
+        <section class="task-doc-section" id="evidence">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="image"></i></div>
+            <div>
+              <span class="task-section-num">Section 08</span>
+              <h2 class="task-section-title">Evidence</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Artifacts and visual records verifying cloud dashboard communication:
+          </p>
+
+          <div class="task-evidence-grid">
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="layout-dashboard"></i></div>
+                <span class="task-evidence-filename">adafruit-io-dashboard-view.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Adafruit IO Dashboard:</strong> Customized web dashboard showing toggle button linked to <code>led-control</code> feed.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="database"></i></div>
+                <span class="task-evidence-filename">adafruit-io-feed-data-log.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Feed History:</strong> Timestamped record of published values (1/0) recorded in the Adafruit IO cloud feed.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="terminal"></i></div>
+                <span class="task-evidence-filename">esp32-mqtt-serial-log.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Serial Output:</strong> Monitor log showing successful MQTT broker connection, subscription handshake, and incoming payload decoding.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="zap"></i></div>
+                <span class="task-evidence-filename">hardware-remote-actuation.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Remote Actuation:</strong> LED illuminated in response to toggle command issued from cloud dashboard.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 9 — Challenges & Fixes -->
+        <section class="task-doc-section" id="challenges">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="alert-triangle"></i></div>
+            <div>
+              <span class="task-section-num">Section 09</span>
+              <h2 class="task-section-title">Challenges &amp; Fixes</h2>
+            </div>
+          </div>
+
+          <div class="task-trouble-card">
+            <div class="task-trouble-step">
+              <span class="task-trouble-label problem"><i data-lucide="alert-circle"></i> Problem</span>
+              <span class="task-trouble-val">Broker returned "Connection Error: RC 4" (Bad Credentials) during <code>mqtt.connect()</code>.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label"><i data-lucide="search"></i> Investigation</span>
+              <span class="task-trouble-val">Checked the Adafruit IO console and found that my account password was mistakenly used instead of the dedicated AIO Active Key.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label solution"><i data-lucide="check"></i> Solution</span>
+              <span class="task-trouble-val">Regenerated the dedicated Adafruit IO API Key and updated <code>AIO_KEY</code> in the sketch.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label outcome"><i data-lucide="award"></i> Outcome</span>
+              <span class="task-trouble-val">Broker returned <code>RC 0</code> (Connection Accepted) and immediately acknowledged feed subscriptions.</span>
+            </div>
+          </div>
+
+          <div class="task-trouble-card">
+            <div class="task-trouble-step">
+              <span class="task-trouble-label problem"><i data-lucide="alert-circle"></i> Problem</span>
+              <span class="task-trouble-val">ESP32 stopped receiving messages after being idle for approximately 3 minutes.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label"><i data-lucide="search"></i> Investigation</span>
+              <span class="task-trouble-val">Adafruit IO MQTT broker terminates client sockets if no keep-alive ping or publish occurs within the timeout threshold.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label solution"><i data-lucide="check"></i> Solution</span>
+              <span class="task-trouble-val">Added periodic <code>mqtt.ping()</code> invocation within the main execution loop and automated reconnect handling in <code>MQTT_connect()</code>.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label outcome"><i data-lucide="award"></i> Outcome</span>
+              <span class="task-trouble-val">Zero connection drops over continuous overnight test runs.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 10 — Reflection -->
+        <section class="task-doc-section" id="reflection">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="message-square"></i></div>
+            <div>
+              <span class="task-section-num">Section 10</span>
+              <h2 class="task-section-title">Reflection</h2>
+            </div>
+          </div>
+          <div class="task-callout">
+            <p class="task-callout-text font-italic" style="font-size: 0.95rem;">
+              "This activity introduced me to cloud-based IoT communication. I explored how MQTT can connect an ESP32 to Adafruit IO and how a dashboard can provide an interface for interacting with a physical device. It helped me understand how IoT systems can extend beyond direct local connections, decoupling the client and actuator through an intermediary broker."
+            </p>
+          </div>
+          <h3 class="task-subheading"><i data-lucide="sparkles"></i> Future Improvements</h3>
+          <p class="task-text">
+            In future iterations, upgrading from unencrypted TCP port 1883 to SSL/TLS encrypted MQTTS on port 8883 using <code>WiFiClientSecure</code> would ensure all payloads, authentication keys, and telemetry streams are protected against interception across public transit networks.
+          </p>
+        </section>
+
+        <!-- Section 11 — Repository Link -->
+        <section class="task-doc-section" id="repository">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="github"></i></div>
+            <div>
+              <span class="task-section-num">Section 11</span>
+              <h2 class="task-section-title">Repository Link</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Source code sketches, Adafruit IO feed setups, and configuration documentation are hosted in the GitHub repository:
+          </p>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/JSairam2007/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <i data-lucide="github"></i> View Source Code on GitHub
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 12 — Activity-Specific Checklist -->
+        <section class="task-doc-section" id="checklist">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="check-square"></i></div>
+            <div>
+              <span class="task-section-num">Section 12</span>
+              <h2 class="task-section-title">Activity Checklist</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Review and track completion status for all required Task 2 documentation and implementation items:
+          </p>
+
+          <div class="task-checklist-box">
+            <div class="task-checklist-summary">
+              <span class="task-checklist-count" id="checklistCount">0 of 19 Completed</span>
+              <span class="category-badge badge-primary" id="checklistPercent">0%</span>
+            </div>
+            <ul class="task-checklist-items">
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Purpose of Adafruit IO in an IoT system.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Basic concept of MQTT.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>MQTT Publisher, Subscriber, and Broker identified.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Role of an MQTT Topic/Feed.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Hardware and software used.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Adafruit IO account created and documented.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Dashboard and feed configuration documented.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Communication flow between ESP32, MQTT, and Adafruit IO.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>MQTT topic/feed structure used.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Complete ESP32 source code.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Explanation of important code sections.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Photographs of the hardware setup.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Screenshots of the Adafruit IO dashboard.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>LED control through the cloud dashboard demonstrated.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Working demonstration video.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Problems encountered during MQTT/cloud setup.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Solutions implemented.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Brief learning reflection.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>All required files available in the repository.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="task-bottom-nav" aria-label="Activity Navigation">
+          <a href="./task-1.html" class="task-nav-direction-btn">
+            <i data-lucide="arrow-left"></i> Previous: Task 1 (Web Server)
+          </a>
+          <a href="../../index.html#protosem" class="btn btn-outline">
+            <i data-lucide="grid"></i> Week 07 Overview
+          </a>
+          <a href="./task-3.html" class="task-nav-direction-btn">
+            Next: Task 3 (IFTTT Automation) <i data-lucide="arrow-right"></i>
+          </a>
+        </nav>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="footer-logo">&lt;JS/&gt; J Sairam</span>
+        <p class="footer-copy">Student at Kumaraguru College of Technology. ProtoSem Innovation Fellowship Journal.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#overview" class="back-to-top">
+          Back to Top <i data-lucide="arrow-up"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./task-details.js"></script>
+</body>
+</html>

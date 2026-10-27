@@ -603,6 +603,308 @@ const PROTOSEM_WEEKS = [
       }
     ],
     reflection: "Week 6 provided tangible, physical engineering experience. Moving from software abstractions to circuit breadboarding, component soldering, and battery power brought electronics fundamentals to life. Implementing the Dote Move game on the ESP32 reinforced how score-driven game logic and timing constraints operate in resource-efficient embedded microcontrollers."
+  },
+  {
+    week: 7,
+    title: "IoT & Connectivity: Connecting Hardware to the Web",
+    category: "IoT & Cloud Connectivity",
+    badgeClass: "badge-primary",
+    status: "Completed",
+    description: "Exploring how microcontrollers, web interfaces, cloud platforms, and automation services work together to connect physical hardware with digital systems.",
+    overview: "During Week 07 of ProtoSem, I explored different ways to connect physical hardware with web interfaces and cloud-based platforms. The activities covered local LED control using an ESP32 web server, cloud communication through Adafruit IO and MQTT, event-based automation with IFTTT, and environmental monitoring using Firebase.\n\nThese tasks helped me understand how electronics, programming, web technologies, and cloud services can work together in IoT applications.",
+    repoUrl: "https://github.com/JSairam2007/portfolio",
+    tasks: [
+      {
+        id: "task-1",
+        number: 1,
+        category: "Web & Microcontroller",
+        title: "Task 1 — ESP32 Web Server & HTML LED Control",
+        shortDesc: "Designed and deployed an embedded HTTP web server on the ESP32 microcontroller using Arduino IDE to control an LED through a browser-based interface.",
+        objective: "Understand how a microcontroller can host a web interface and respond to user commands to control a connected LED.",
+        technicalExplanation: [
+          "The ESP32 microcontroller operates simultaneously as an embedded computation unit and an HTTP web server on the local Wi-Fi network.",
+          "An HTML-based control interface provides the graphical user experience delivered straight to the client browser.",
+          "When a user interacts with the browser interface, an HTTP request is dispatched to the ESP32 IP address.",
+          "The ESP32 parses the incoming request URI, processes the command, and drives the corresponding GPIO output pin HIGH or LOW to switch the LED.",
+          "This task establishes the essential foundation bridging browser-based web development with physical embedded systems."
+        ],
+        workflows: [
+          {
+            title: "Hardware Control Flow",
+            steps: ["Browser Interface", "HTTP Request", "ESP32 Web Server", "GPIO Output", "LED Response"]
+          }
+        ],
+        technologies: ["ESP32", "Arduino IDE", "HTML", "HTTP", "GPIO"],
+        reflection: "I learned how a web interface can be connected directly to a physical device. This activity helped me understand the relationship between browser-based controls, HTTP communication, and GPIO outputs, while introducing me to the integration of web development and embedded systems."
+      },
+      {
+        id: "task-2",
+        number: 2,
+        category: "Cloud-Based IoT Control",
+        title: "Task 2 — Adafruit IO Dashboard & MQTT",
+        shortDesc: "Extended the local ESP32 web-control concept into a cloud-connected IoT system using Adafruit IO and MQTT.",
+        objective: "Understand how a cloud dashboard can communicate with an ESP32 and support remote device control.",
+        technicalExplanation: [
+          "Adafruit IO serves as a centralized cloud IoT platform offering customizable visual dashboard widgets such as toggles, gauges, and feeds.",
+          "MQTT (Message Queuing Telemetry Transport) operates as a lightweight, low-overhead publish-subscribe protocol connecting the ESP32 to cloud brokers.",
+          "A cloud dashboard toggle action publishes a control command message to a designated feed topic.",
+          "The ESP32 subscribes to the feed topic, receives message payloads instantly via MQTT, and updates GPIO output states accordingly.",
+          "Cloud-based control decouples the client from local network subnets, transitioning from local LAN requests to scalable remote device management."
+        ],
+        workflows: [
+          {
+            title: "Cloud Actuation Flow",
+            steps: ["Adafruit IO Dashboard", "MQTT Message", "ESP32", "GPIO Output", "Hardware Response"]
+          }
+        ],
+        bidirectionalNote: "For bidirectional communication, device status and environmental information can also be published from the ESP32 back to an Adafruit IO cloud feed.",
+        technologies: ["ESP32", "Adafruit IO", "MQTT", "Arduino IDE", "Cloud Dashboard"],
+        reflection: "This activity introduced me to cloud-based IoT communication. I explored how MQTT can connect an ESP32 to Adafruit IO and how a dashboard can provide an interface for interacting with a physical device. It helped me understand how IoT systems can extend beyond direct local connections."
+      },
+      {
+        id: "task-3",
+        number: 3,
+        category: "IoT Automation",
+        title: "Task 3 — IFTTT + Adafruit IO IoT Automation",
+        shortDesc: "Extended the cloud-based ESP32 control concept by exploring event-driven IoT automation using IFTTT, Adafruit IO, and MQTT.",
+        objective: "Understand how events and triggers can initiate actions in an IoT system without requiring every action to be initiated manually.",
+        technicalExplanation: [
+          "IFTTT (If This Then That) operates as an integration service that automates cross-platform workflows connecting web services and IoT devices.",
+          "Configured events or external triggers initiate automated conditional logic without requiring manual human interaction.",
+          "IFTTT triggers dispatch automated webhook requests directly to the Adafruit IO platform.",
+          "Adafruit IO passes the event-driven payload over MQTT to the connected ESP32 client.",
+          "Demonstrates the architectural shift from direct human-in-the-loop control to event-driven automated responses."
+        ],
+        workflows: [
+          {
+            title: "Event-Driven Automation Flow",
+            steps: ["Trigger or Event", "IFTTT Automation", "Adafruit IO", "MQTT", "ESP32", "Hardware Response"]
+          }
+        ],
+        technologies: ["IFTTT", "Adafruit IO", "MQTT", "ESP32"],
+        reflection: "I explored how event-driven automation can extend an IoT system beyond manual control. This activity helped me understand the relationship between online services, cloud communication, and hardware responses, as well as the role of automation in connected applications."
+      },
+      {
+        id: "task-4",
+        number: 4,
+        category: "Environmental Monitoring & Remote Control",
+        title: "Task 4 — Firebase IoT Monitoring Dashboard",
+        shortDesc: "Explored an ESP32-based environmental monitoring and remote bulb-control system using Firebase, DHT11, and LDR sensors.",
+        objective: "Understand how sensor data, cloud services, and a web dashboard can work together in an IoT monitoring system.",
+        technicalExplanation: [
+          "The ESP32 microcontroller interfaces with analog and digital sensors to gather live environmental conditions.",
+          "The DHT11 sensor measures ambient temperature and relative humidity levels with digital signal output.",
+          "The LDR (Light Dependent Resistor) circuit measures light intensity variations based on ambient illumination.",
+          "Google Firebase provides a cloud backend for real-time synchronization and storage of telemetry feeds.",
+          "A custom web dashboard reads live Firebase nodes and visualizes sensor telemetry for continuous monitoring.",
+          "The connected dashboard interface supports bidirectional remote actuation, transmitting control commands to switch an electrical bulb."
+        ],
+        workflows: [
+          {
+            title: "Environmental Telemetry Monitoring Flow",
+            steps: ["DHT11 & LDR Sensors", "ESP32", "Firebase", "Monitoring Dashboard"]
+          },
+          {
+            title: "Remote Actuation Flow",
+            steps: ["Dashboard", "Firebase Communication", "ESP32", "Bulb Control"]
+          }
+        ],
+        technologies: ["ESP32", "DHT11", "LDR", "Firebase", "Web Dashboard", "Bulb and control hardware"],
+        reflection: "This activity helped me understand how environmental sensors can provide information to a connected system and how cloud services can support monitoring through a web dashboard. I also explored the relationship between sensor inputs and remote hardware control."
+      },
+      {
+        id: "task-5",
+        number: 5,
+        category: "IoT Monitoring & Data Management",
+        title: "Task 5 — Firebase Logging, Automation & Data Export",
+        shortDesc: "Explored an integrated IoT monitoring system combining environmental sensing, automatic lighting, Firebase-based information management, historical records, and data export.",
+        objective: "Understand how monitoring and control can be extended with automated behaviour and historical data management.",
+        technicalExplanation: [
+          "Environmental sensing acts as the primary observational layer across physical spaces.",
+          "Firebase maintains real-time records and structures historical time-series datasets for auditing.",
+          "Autonomous control logic maps sensor inputs directly to lighting response thresholds without human intervention.",
+          "A unified web dashboard provides both live instrumentation displays and chronological historical tables.",
+          "Historical logs allow engineers to identify patterns, observe ambient fluctuations, and diagnose anomalies.",
+          "Data export enables downloading structured logs for external spreadsheet or statistical data analysis."
+        ],
+        workflows: [
+          {
+            title: "Telemetry & Historical Records Flow",
+            steps: ["Sensors", "ESP32", "Firebase", "Dashboard & Historical Records"]
+          },
+          {
+            title: "Automatic Lighting Control Flow",
+            steps: ["Sensor Information", "Control Logic", "ESP32", "Lighting Response"]
+          },
+          {
+            title: "Data Export & Analytics Flow",
+            steps: ["Historical Records", "Data Export", "External Analysis"]
+          }
+        ],
+        technologies: ["ESP32", "DHT11", "LDR", "Firebase", "Web Dashboard", "IoT Data Logging", "Data Export"],
+        reflection: "This task introduced me to the broader role of data management in IoT applications. I explored how monitoring, automatic lighting, and historical records can contribute to a more complete system, while learning why collected data can be useful for further analysis."
+      }
+    ],
+    systemProgression: [
+      {
+        stage: 1,
+        title: "Local Hardware Control",
+        desc: "An ESP32-hosted web interface controls an LED through HTTP requests and GPIO outputs."
+      },
+      {
+        stage: 2,
+        title: "Cloud Connectivity",
+        desc: "Adafruit IO and MQTT support communication between a cloud dashboard and an ESP32."
+      },
+      {
+        stage: 3,
+        title: "Event-Driven Automation",
+        desc: "IFTTT introduces a way to connect triggers with actions in an IoT workflow."
+      },
+      {
+        stage: 4,
+        title: "Environmental Monitoring",
+        desc: "Firebase supports an IoT monitoring workflow involving the ESP32, DHT11, LDR, and a web dashboard."
+      },
+      {
+        stage: 5,
+        title: "Logging and Data Management",
+        desc: "Historical records, automatic lighting, and data export extend the monitoring workflow."
+      }
+    ],
+    keyLearnings: {
+      technical: [
+        "ESP32 web-server fundamentals",
+        "HTML-based device control",
+        "HTTP communication and GPIO control",
+        "MQTT communication",
+        "Adafruit IO integration",
+        "IFTTT automation concepts",
+        "Firebase-based monitoring and data management",
+        "Environmental sensing using DHT11 and LDR",
+        "IoT data logging and export"
+      ],
+      systemIntegration: [
+        "Connecting hardware with web interfaces",
+        "Understanding communication between microcontrollers and cloud platforms",
+        "Exploring the relationship between sensor data and user interfaces",
+        "Understanding the roles of monitoring, control, automation, and data management"
+      ],
+      personalDevelopment: [
+        "Practical problem-solving",
+        "Technical observation",
+        "Systems thinking",
+        "Connecting web development with electronics",
+        "Understanding end-to-end IoT workflows"
+      ]
+    },
+    techGroups: [
+      {
+        name: "Microcontroller & Development",
+        icon: "cpu",
+        items: ["ESP32", "Arduino IDE"]
+      },
+      {
+        name: "Web Technologies",
+        icon: "globe",
+        items: ["HTML", "HTTP", "GPIO-based control"]
+      },
+      {
+        name: "Cloud & Communication",
+        icon: "cloud",
+        items: ["Adafruit IO", "MQTT", "IFTTT", "Firebase"]
+      },
+      {
+        name: "Sensors & Hardware",
+        icon: "activity",
+        items: ["DHT11", "LDR", "LED", "Bulb and control hardware"]
+      },
+      {
+        name: "Data Management",
+        icon: "database",
+        items: ["IoT data logging", "Historical records", "Data export"]
+      }
+    ],
+    skills: [
+      "ESP32 development",
+      "Arduino IDE",
+      "HTML-based device control",
+      "IoT fundamentals",
+      "MQTT communication",
+      "Adafruit IO integration",
+      "IFTTT automation concepts",
+      "Firebase integration",
+      "Sensor-based monitoring",
+      "IoT dashboard concepts",
+      "Data logging and export"
+    ],
+    challenges: "One of the most important aspects of this week's learning was understanding how different components work together in an IoT system. Connecting a web interface to a microcontroller introduced the relationship between software and physical hardware, while cloud platforms and messaging protocols demonstrated how communication can extend beyond a local connection.\n\nThe monitoring and automation tasks also helped me understand that an IoT application involves more than controlling a device. It can also involve collecting information, presenting it through an interface, maintaining historical records, and using information to support automated behaviour.\n\nOverall, the week helped me connect my learning in web development, electronics, and programming through practical IoT concepts.",
+    summary: "Week 07 introduced me to different approaches to connecting physical hardware with digital systems. I explored local LED control through an ESP32 web server, cloud-based communication using Adafruit IO and MQTT, event-driven automation through IFTTT, and environmental monitoring using Firebase.\n\nThe later tasks extended these concepts into monitoring dashboards, automatic lighting, historical records, and data export. Together, these activities helped me develop a broader understanding of how embedded systems, web technologies, cloud platforms, and connected devices can work together in IoT applications.",
+    insights: [
+      "ESP32 web server architecture enables local browser-based hardware actuation over HTTP.",
+      "MQTT protocol delivers lightweight publish-subscribe messaging between microcontrollers and cloud brokers like Adafruit IO.",
+      "IFTTT service orchestration enables autonomous event-driven triggers without manual human intervention.",
+      "Google Firebase enables real-time synchronization of environmental telemetry from DHT11 and LDR sensors to web dashboards.",
+      "Data logging and export pipelines transform ephemeral sensor readings into persistent historical datasets for external analysis."
+    ],
+    activities: [
+      "Task 1: Designed & deployed ESP32 HTTP web server for local HTML LED control.",
+      "Task 2: Built Adafruit IO cloud dashboard with bidirectional MQTT telemetry feeds.",
+      "Task 3: Configured IFTTT webhook event automations driving hardware responses.",
+      "Task 4: Implemented Firebase IoT dashboard with DHT11 temperature/humidity and LDR light sensing.",
+      "Task 5: Engineered Firebase telemetry logging, automatic lighting logic, and CSV data export."
+    ],
+    technologies: [
+      "ESP32", "Arduino IDE", "HTML", "HTTP", "GPIO",
+      "Adafruit IO", "MQTT", "IFTTT", "Firebase",
+      "DHT11", "LDR", "LED", "Bulb and control hardware", "IoT data logging", "Data export"
+    ],
+    keyTakeaways: [
+      "Stage 1: Bridge client-side web development with physical embedded firmware execution.",
+      "Stage 2: Decouple direct networking through cloud-based MQTT publish-subscribe messaging.",
+      "Stage 3: Automate IoT actions through event-driven service recipes without manual intervention.",
+      "Stage 4: Stream real-time environmental telemetry to cloud databases and visual web dashboards.",
+      "Stage 5: Persist, audit, and export time-series IoT sensor datasets for analytical workflows."
+    ],
+    featuredVisual: {
+      icon: "wifi",
+      badge: "IOT & CONNECTIVITY",
+      title: "ESP32, Cloud Brokers & Firebase",
+      sub: "HTTP Web Servers, MQTT Pub/Sub, IFTTT Automation, and Telemetry Logging"
+    },
+    gallery: [
+      {
+        title: "ESP32 Web Server & Local LED Control",
+        caption: "Hosting an embedded web server on the ESP32 to trigger GPIO pins via local browser requests.",
+        alt: "ESP32 HTTP Web Server LED Control Architecture",
+        icon: "server"
+      },
+      {
+        title: "Adafruit IO Cloud Dashboard & MQTT",
+        caption: "Subscribing the ESP32 to MQTT broker topics on Adafruit IO for cloud-connected telemetry.",
+        alt: "Adafruit IO and MQTT broker workflow",
+        icon: "cloud"
+      },
+      {
+        title: "IFTTT Event-Driven IoT Automation",
+        caption: "Orchestrating automated actions connecting third-party triggers to Adafruit IO and ESP32.",
+        alt: "IFTTT Event-Driven IoT Automation workflow",
+        icon: "zap"
+      },
+      {
+        title: "Firebase IoT Environmental Monitoring",
+        caption: "Streaming real-time DHT11 temperature/humidity and LDR light readings to Firebase.",
+        alt: "Firebase IoT Real-time Database and Environmental Dashboard",
+        icon: "database"
+      },
+      {
+        title: "Data Logging, Automatic Lighting & Export",
+        caption: "Automated light actuation with LDR, persistent Firebase historical records, and external data export.",
+        alt: "IoT Data Logging, Automation and CSV Export Pipeline",
+        icon: "file-spreadsheet"
+      }
+    ],
+    reflection: "One of the most important aspects of this week's learning was understanding how different components work together in an IoT system. Connecting a web interface to a microcontroller introduced the relationship between software and physical hardware, while cloud platforms and messaging protocols demonstrated how communication can extend beyond a local connection.\n\nThe monitoring and automation tasks also helped me understand that an IoT application involves more than controlling a device. It can also involve collecting information, presenting it through an interface, maintaining historical records, and using information to support automated behaviour.\n\nOverall, the week helped me connect my learning in web development, electronics, and programming through practical IoT concepts."
   }
 ];
 
@@ -697,7 +999,9 @@ function renderProtoSemWeek(index) {
 
   // Update Right Panel: Header
   const weekPill = document.getElementById("protoWeekPill");
-  if (weekPill) weekPill.textContent = `WEEK ${data.week}`;
+  if (weekPill) {
+    weekPill.textContent = data.week === 7 ? "PROTOSEM · WEEK 07" : `WEEK ${data.week}`;
+  }
 
   const weekTitle = document.getElementById("protoWeekTitle");
   if (weekTitle) weekTitle.textContent = data.title;
@@ -708,80 +1012,369 @@ function renderProtoSemWeek(index) {
   const weekOverview = document.getElementById("protoWeekOverview");
   if (weekOverview) weekOverview.textContent = data.overview;
 
-  // Update Learning Insights
-  const insightsList = document.getElementById("protoInsightsList");
-  if (insightsList) {
-    insightsList.innerHTML = "";
-    data.insights.forEach(ins => {
-      const div = document.createElement("div");
-      div.className = "proto-insight-item";
-      div.textContent = ins;
-      insightsList.appendChild(div);
-    });
-  }
+  const backLink = document.getElementById("protoBackLink");
+  const tasksContainer = document.getElementById("protoTasksContainer");
+  const defaultBlocks = document.getElementById("protoDefaultBlocks");
 
-  // Update Practical Activities
-  const activitiesList = document.getElementById("protoActivitiesList");
-  if (activitiesList) {
-    activitiesList.innerHTML = "";
-    data.activities.forEach(act => {
-      const li = document.createElement("li");
-      li.textContent = act;
-      activitiesList.appendChild(li);
-    });
-  }
-
-  // Update Technologies Tags
-  const techTags = document.getElementById("protoTechTags");
-  if (techTags) {
-    techTags.innerHTML = "";
-    data.technologies.forEach(tech => {
-      const span = document.createElement("span");
-      span.className = "proto-tag";
-      span.textContent = tech;
-      techTags.appendChild(span);
-    });
-  }
-
-  // Update Skills Learned Chips
-  const skillsTags = document.getElementById("protoSkillsTags");
-  if (skillsTags) {
-    skillsTags.innerHTML = "";
-    data.skills.forEach(skill => {
-      const span = document.createElement("span");
-      span.className = "proto-skill-chip";
-      span.textContent = skill;
-      skillsTags.appendChild(span);
-    });
-  }
-
-  // Update Challenges
-  const challengeBox = document.getElementById("protoChallengeBox");
-  const challengeText = document.getElementById("protoChallengeText");
-  if (challengeBox && challengeText) {
-    if (data.challenges && data.challenges.trim().length > 0) {
-      challengeBox.style.display = "block";
-      challengeText.textContent = data.challenges;
-    } else {
-      challengeBox.style.display = "none";
+  if (data.tasks && data.tasks.length > 0) {
+    if (backLink) {
+      backLink.style.display = "inline-flex";
+      backLink.href = "#protosem";
+      backLink.innerHTML = `<i data-lucide="arrow-left"></i> ProtoSem Overview`;
     }
-  }
+    if (defaultBlocks) {
+      defaultBlocks.style.display = "none";
+    }
+    if (tasksContainer) {
+      tasksContainer.style.display = "block";
+      renderProtoWeek7Tasks(tasksContainer, data);
+    }
+  } else {
+    if (backLink) {
+      backLink.style.display = "none";
+    }
+    if (tasksContainer) {
+      tasksContainer.style.display = "none";
+      tasksContainer.innerHTML = "";
+    }
+    if (defaultBlocks) {
+      defaultBlocks.style.display = "block";
+    }
 
-  // Update Key Takeaways
-  const takeawaysList = document.getElementById("protoTakeawaysList");
-  if (takeawaysList) {
-    takeawaysList.innerHTML = "";
-    data.keyTakeaways.forEach(tk => {
-      const li = document.createElement("li");
-      li.textContent = tk;
-      takeawaysList.appendChild(li);
-    });
+    // Update Learning Insights
+    const insightsList = document.getElementById("protoInsightsList");
+    if (insightsList) {
+      insightsList.innerHTML = "";
+      data.insights.forEach(ins => {
+        const div = document.createElement("div");
+        div.className = "proto-insight-item";
+        div.textContent = ins;
+        insightsList.appendChild(div);
+      });
+    }
+
+    // Update Practical Activities
+    const activitiesList = document.getElementById("protoActivitiesList");
+    if (activitiesList) {
+      activitiesList.innerHTML = "";
+      data.activities.forEach(act => {
+        const li = document.createElement("li");
+        li.textContent = act;
+        activitiesList.appendChild(li);
+      });
+    }
+
+    // Update Technologies Tags
+    const techTags = document.getElementById("protoTechTags");
+    if (techTags) {
+      techTags.innerHTML = "";
+      data.technologies.forEach(tech => {
+        const span = document.createElement("span");
+        span.className = "proto-tag";
+        span.textContent = tech;
+        techTags.appendChild(span);
+      });
+    }
+
+    // Update Skills Learned Chips
+    const skillsTags = document.getElementById("protoSkillsTags");
+    if (skillsTags) {
+      skillsTags.innerHTML = "";
+      data.skills.forEach(skill => {
+        const span = document.createElement("span");
+        span.className = "proto-skill-chip";
+        span.textContent = skill;
+        skillsTags.appendChild(span);
+      });
+    }
+
+    // Update Challenges
+    const challengeBox = document.getElementById("protoChallengeBox");
+    const challengeText = document.getElementById("protoChallengeText");
+    if (challengeBox && challengeText) {
+      if (data.challenges && data.challenges.trim().length > 0) {
+        challengeBox.style.display = "block";
+        challengeText.textContent = data.challenges;
+      } else {
+        challengeBox.style.display = "none";
+      }
+    }
+
+    // Update Key Takeaways
+    const takeawaysList = document.getElementById("protoTakeawaysList");
+    if (takeawaysList) {
+      takeawaysList.innerHTML = "";
+      data.keyTakeaways.forEach(tk => {
+        const li = document.createElement("li");
+        li.textContent = tk;
+        takeawaysList.appendChild(li);
+      });
+    }
   }
 
   // Refresh Lucide Icons in dynamically created elements
   if (window.lucide) {
     lucide.createIcons();
   }
+}
+
+// Track active task inside Week 07
+let currentProtoTaskIndex = 0;
+
+function renderProtoWeek7Tasks(container, data) {
+  if (!data.tasks || data.tasks.length === 0) return;
+  if (currentProtoTaskIndex >= data.tasks.length) currentProtoTaskIndex = 0;
+  const activeTask = data.tasks[currentProtoTaskIndex];
+
+  // Build activity overview card grid
+  const activityCardsHtml = data.tasks.map(task => `
+    <div class="proto-activity-card">
+      <div class="proto-activity-card-top">
+        <span class="proto-activity-card-num">TASK 0${task.number}</span>
+        <span class="proto-activity-card-cat">${task.category}</span>
+      </div>
+      <h5>${task.title.replace(/^Task \d+ [—\-] /, '')}</h5>
+      <p>${task.shortDesc}</p>
+      <div class="proto-activity-card-tags">
+        ${task.technologies.slice(0, 4).map(t => `<span class="proto-tag">${t}</span>`).join('')}
+        ${task.technologies.length > 4 ? `<span class="proto-tag">+${task.technologies.length - 4} more</span>` : ''}
+      </div>
+      <div class="proto-activity-card-footer">
+        <span style="font-size: 0.75rem; color: var(--text-muted);">IoT Activity</span>
+        <a href="./protosem/week-07/task-${task.number}.html" class="proto-activity-view-btn" target="_blank">
+          <i data-lucide="external-link"></i> View More
+        </a>
+      </div>
+    </div>
+  `).join('');
+
+  let html = `
+    <div class="proto-tasks-wrapper">
+
+      <!-- 0. Activity Cards Overview Grid -->
+      <div class="proto-activity-cards-section">
+        <div class="proto-activity-cards-section-header">
+          <i data-lucide="layout-grid" style="width:18px;height:18px;color:var(--accent-primary);"></i>
+          <h4>Week 07 — IoT Activities Overview</h4>
+        </div>
+        <div class="proto-activity-cards-grid">
+          ${activityCardsHtml}
+        </div>
+      </div>
+
+      <!-- 1. Task Tabs Navigation -->
+
+      <div class="proto-tasks-nav-box">
+        <div class="proto-task-tabs-header">
+          <span class="proto-task-tabs-title"><i data-lucide="layers"></i> Weekly IoT Activities &amp; Tasks</span>
+          <span class="proto-task-badge">5 Tasks</span>
+        </div>
+        <div class="proto-task-tabs-list" role="tablist" aria-label="Week 07 Tasks">
+          ${data.tasks.map((task, idx) => `
+            <button class="proto-task-tab ${idx === currentProtoTaskIndex ? 'active' : ''}" 
+                    role="tab" 
+                    aria-selected="${idx === currentProtoTaskIndex ? 'true' : 'false'}"
+                    data-task-index="${idx}">
+              <span class="proto-task-tab-num">${task.number}</span>
+              <span>Task ${task.number}: ${task.title.replace(/^Task \d+ — /, '')}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- 2. Active Task Card -->
+      <div class="proto-active-task-card" id="protoActiveTaskCard">
+        <div class="proto-task-meta-top">
+          <span class="category-badge badge-primary">${activeTask.category}</span>
+          <span class="proto-task-pill">TASK 0${activeTask.number} OF 05</span>
+        </div>
+
+        <h4 class="proto-task-title">${activeTask.title}</h4>
+        <p class="proto-task-short-desc">${activeTask.shortDesc}</p>
+
+        <!-- Objective -->
+        <div class="proto-objective-callout">
+          <i data-lucide="target"></i>
+          <div>
+            <strong style="font-size: 0.85rem; color: var(--accent-primary); display: block; margin-bottom: 0.2rem;">OBJECTIVE</strong>
+            <p class="proto-objective-text">${activeTask.objective}</p>
+          </div>
+        </div>
+
+        <!-- Technical Explanation -->
+        <div class="proto-technical-box">
+          <h5 class="proto-technical-heading"><i data-lucide="file-code"></i> Technical Breakdown</h5>
+          <ul class="proto-technical-list">
+            ${activeTask.technicalExplanation.map(pt => `<li>${pt}</li>`).join('')}
+          </ul>
+        </div>
+
+        <!-- Technical Workflow Diagram(s) -->
+        <div class="proto-workflows-container">
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">
+            <i data-lucide="git-branch" style="width: 14px; height: 14px; color: var(--accent-primary); display: inline-block; vertical-align: middle;"></i>
+            Conceptual System Workflow
+          </div>
+          ${activeTask.workflows.map(wf => `
+            <div class="proto-wf-flow">
+              <div class="proto-wf-label"><i data-lucide="corner-down-right"></i> ${wf.title}</div>
+              <div class="proto-wf-steps">
+                ${wf.steps.map((st, sIdx) => `
+                  <div class="proto-wf-step">
+                    <span class="proto-wf-step-num">${sIdx + 1}</span>
+                    <span class="proto-wf-step-text">${st}</span>
+                  </div>
+                  ${sIdx < wf.steps.length - 1 ? `
+                    <div class="proto-wf-arrow" aria-hidden="true">
+                      <i data-lucide="arrow-right"></i>
+                    </div>
+                  ` : ''}
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+          ${activeTask.bidirectionalNote ? `
+            <div class="proto-wf-bidirectional-note">
+              <i data-lucide="arrow-left-right"></i>
+              <span>${activeTask.bidirectionalNote}</span>
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- Technologies Used in Task -->
+        <div class="proto-block" style="margin: 0;">
+          <h5 class="proto-technical-heading"><i data-lucide="cpu"></i> Task Technologies</h5>
+          <div class="proto-tags">
+            ${activeTask.technologies.map(t => `<span class="proto-tag">${t}</span>`).join('')}
+          </div>
+        </div>
+
+        <!-- Learning Reflection -->
+        <div class="proto-task-reflection-box">
+          <div class="proto-task-reflection-title">
+            <i data-lucide="message-square"></i> Student Learning Reflection
+          </div>
+          <p class="proto-task-reflection-text">"${activeTask.reflection}"</p>
+        </div>
+      </div>
+
+      <!-- 3. Overall System Progression (5 Stages) -->
+      <div class="proto-progression-box">
+        <div class="proto-progression-header">
+          <div class="proto-progression-icon"><i data-lucide="git-merge"></i></div>
+          <div>
+            <h4 class="proto-block-title">Overall System Progression</h4>
+            <p class="proto-progression-sub">Five interconnected stages showing how the weekly tasks introduce progressive aspects of IoT development.</p>
+          </div>
+        </div>
+        <div class="proto-progression-grid">
+          ${data.systemProgression.map(stg => `
+            <div class="proto-stage-card">
+              <span class="proto-stage-badge">Stage ${stg.stage}</span>
+              <h5 class="proto-stage-title">${stg.title}</h5>
+              <p class="proto-stage-desc">${stg.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+        <div class="proto-progression-note">
+          <i data-lucide="info"></i>
+          <span><strong>Architectural Context:</strong> These activities represent five related learning tasks exploring modular layers of IoT systems—from localized microcontroller GPIO control to cloud synchronization and analytical data export—rather than a single combined production monolith.</span>
+        </div>
+      </div>
+
+      <!-- 4. Key Learnings (3 Categories) -->
+      <div class="proto-learnings-box">
+        <h4 class="proto-block-title"><i data-lucide="award"></i> Key Learnings &amp; Competencies</h4>
+        <div class="proto-learnings-grid">
+          <div class="proto-learning-card">
+            <div class="proto-learning-card-header">
+              <div class="proto-learning-icon"><i data-lucide="code"></i></div>
+              <h5>Technical Learning</h5>
+            </div>
+            <ul class="proto-learning-list">
+              ${data.keyLearnings.technical.map(item => `<li><i data-lucide="check"></i> <span>${item}</span></li>`).join('')}
+            </ul>
+          </div>
+          <div class="proto-learning-card">
+            <div class="proto-learning-card-header">
+              <div class="proto-learning-icon"><i data-lucide="network"></i></div>
+              <h5>System Integration</h5>
+            </div>
+            <ul class="proto-learning-list">
+              ${data.keyLearnings.systemIntegration.map(item => `<li><i data-lucide="check"></i> <span>${item}</span></li>`).join('')}
+            </ul>
+          </div>
+          <div class="proto-learning-card">
+            <div class="proto-learning-card-header">
+              <div class="proto-learning-icon"><i data-lucide="user-check"></i></div>
+              <h5>Personal Development</h5>
+            </div>
+            <ul class="proto-learning-list">
+              ${data.keyLearnings.personalDevelopment.map(item => `<li><i data-lucide="check"></i> <span>${item}</span></li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Technologies & Hardware Components (5 Organized Categories) -->
+      <div class="proto-tech-groups-box">
+        <h4 class="proto-block-title"><i data-lucide="cpu"></i> Technologies &amp; Components</h4>
+        <div class="proto-tech-groups-grid">
+          ${data.techGroups.map(grp => `
+            <div class="proto-tech-group-card">
+              <div class="proto-tech-group-header">
+                <i data-lucide="${grp.icon}"></i>
+                <h6>${grp.name}</h6>
+              </div>
+              <div class="proto-tags">
+                ${grp.items.map(it => `<span class="proto-tag">${it}</span>`).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- 6. Skills Developed (11 Skills) -->
+      <div class="proto-block">
+        <h4 class="proto-block-title"><i data-lucide="sparkles"></i> Skills Practiced &amp; Explored</h4>
+        <div class="proto-skills-cloud">
+          ${data.skills.map(sk => `<span class="proto-skill-chip"><i data-lucide="check-circle-2"></i> ${sk}</span>`).join('')}
+        </div>
+      </div>
+
+      <!-- 7. Challenges and Reflection -->
+      <div class="proto-block proto-challenges-box">
+        <h4 class="proto-block-title"><i data-lucide="alert-circle"></i> Challenges &amp; Problem Solving</h4>
+        <p class="proto-challenge-text">${data.challenges.replace(/\n\n/g, '</p><p class="proto-challenge-text" style="margin-top: 0.8rem;">')}</p>
+      </div>
+
+      <!-- 8. Weekly Summary -->
+      <div class="proto-summary-box">
+        <div class="proto-summary-header">
+          <div class="proto-summary-icon"><i data-lucide="bookmark-check"></i></div>
+          <h4 class="proto-summary-title">Weekly Summary — Week 07</h4>
+        </div>
+        <p class="proto-summary-text">${data.summary.replace(/\n\n/g, '</p><p class="proto-summary-text" style="margin-top: 0.8rem;">')}</p>
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = html;
+
+  // Add click handlers for task tabs
+  const taskTabs = container.querySelectorAll(".proto-task-tab");
+  taskTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const targetIdx = parseInt(tab.getAttribute("data-task-index"), 10);
+      if (!isNaN(targetIdx) && targetIdx !== currentProtoTaskIndex) {
+        currentProtoTaskIndex = targetIdx;
+        renderProtoWeek7Tasks(container, data);
+        if (window.lucide) lucide.createIcons();
+      }
+    });
+  });
+
+  if (window.lucide) lucide.createIcons();
 }
 
 // Lightbox Open & Navigation

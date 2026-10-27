@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3: IFTTT + Adafruit IO IoT Automation — ProtoSem Week 07</title>
+  <meta name="description" content="Technical documentation for event-driven IoT automation using IFTTT, Adafruit IO, and MQTT during ProtoSem Week 07.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./task-details.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-task-id="task-3">
+
+  <!-- Top Navigation Bar -->
+  <nav class="task-page-nav">
+    <div class="container task-nav-container">
+      <div class="task-nav-left">
+        <a href="../../index.html" class="task-brand-link">&lt;JS/&gt; J Sairam</a>
+        <div class="task-breadcrumb">
+          <i data-lucide="chevron-right"></i>
+          <a href="../../index.html#protosem">ProtoSem</a>
+          <i data-lucide="chevron-right"></i>
+          <a href="../../index.html#protosem">Week 07</a>
+          <i data-lucide="chevron-right"></i>
+          <span style="color: var(--text-primary); font-weight: 600;">Task 3</span>
+        </div>
+      </div>
+      <div class="task-nav-right">
+        <a href="../../index.html#protosem" class="btn btn-sm btn-outline">
+          <i data-lucide="arrow-left"></i> Week 07 Overview
+        </a>
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle theme">
+          <i data-lucide="moon" class="dark-icon"></i>
+          <i data-lucide="sun" class="light-icon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header Section -->
+  <header class="task-hero-section">
+    <div class="container">
+      <div class="task-hero-meta">
+        <span class="task-milestone-pill">PROTOSEM · WEEK 07</span>
+        <span class="category-badge badge-primary">IoT Automation</span>
+        <span class="status-indicator">Completed Activity</span>
+      </div>
+      <h1 class="task-hero-title">Task 3 — IFTTT + Adafruit IO IoT Automation</h1>
+      <p class="task-hero-desc">
+        Extended cloud-based device control by exploring event-driven IoT automation recipes connecting online triggers and webhooks with Adafruit IO and the ESP32.
+      </p>
+      <div class="task-hero-tags">
+        <span class="tech-pill">IFTTT</span>
+        <span class="tech-pill">Adafruit IO</span>
+        <span class="tech-pill">MQTT</span>
+        <span class="tech-pill">ESP32</span>
+        <span class="tech-pill">Webhooks</span>
+        <span class="tech-pill">Event Automation</span>
+        <a href="https://github.com/JSairam2007/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" style="margin-left: auto;">
+          <i data-lucide="github"></i> View Repository
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="container">
+    <div class="task-content-layout">
+
+      <!-- Left Sidebar: Table of Contents & Checklist Widget -->
+      <aside class="task-toc-aside" aria-label="Table of Contents">
+        <div class="task-toc-header">
+          <span class="task-toc-title"><i data-lucide="list"></i> Documentation</span>
+        </div>
+        <ul class="task-toc-list">
+          <li><a href="#overview" class="task-toc-link"><span class="task-toc-num">01</span> Overview</a></li>
+          <li><a href="#concepts" class="task-toc-link"><span class="task-toc-num">02</span> Concepts</a></li>
+          <li><a href="#system-design" class="task-toc-link"><span class="task-toc-num">03</span> System Design</a></li>
+          <li><a href="#hardware-software" class="task-toc-link"><span class="task-toc-num">04</span> Hardware &amp; Software</a></li>
+          <li><a href="#wiring-setup" class="task-toc-link"><span class="task-toc-num">05</span> Wiring &amp; Setup</a></li>
+          <li><a href="#implementation" class="task-toc-link"><span class="task-toc-num">06</span> Implementation</a></li>
+          <li><a href="#configuration" class="task-toc-link"><span class="task-toc-num">07</span> Configuration</a></li>
+          <li><a href="#evidence" class="task-toc-link"><span class="task-toc-num">08</span> Evidence</a></li>
+          <li><a href="#challenges" class="task-toc-link"><span class="task-toc-num">09</span> Challenges &amp; Fixes</a></li>
+          <li><a href="#reflection" class="task-toc-link"><span class="task-toc-num">10</span> Reflection</a></li>
+          <li><a href="#repository" class="task-toc-link"><span class="task-toc-num">11</span> Repository Link</a></li>
+          <li><a href="#checklist" class="task-toc-link"><span class="task-toc-num">12</span> Activity Checklist</a></li>
+        </ul>
+
+        <div class="task-toc-progress">
+          <div class="toc-progress-label">
+            <span>Checklist Progress</span>
+            <span id="tocPercent">0%</span>
+          </div>
+          <div class="toc-progress-bar">
+            <div class="toc-progress-fill" id="tocProgressFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Main Documentation Body -->
+      <div class="task-doc-body">
+
+        <!-- Section 1 — Overview -->
+        <section class="task-doc-section" id="overview">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="file-text"></i></div>
+            <div>
+              <span class="task-section-num">Section 01</span>
+              <h2 class="task-section-title">Overview</h2>
+            </div>
+          </div>
+          <div class="task-callout">
+            <div class="task-callout-title"><i data-lucide="target"></i> Objective</div>
+            <p class="task-callout-text">
+              Understand how external events and condition triggers can initiate actions in an IoT system automatically without requiring continuous manual user intervention.
+            </p>
+          </div>
+          <h3 class="task-subheading"><i data-lucide="help-circle"></i> Problem Being Addressed</h3>
+          <p class="task-text">
+            In Tasks 1 and 2, every hardware actuation required a human user to manually press a button on a local webpage or cloud dashboard. However, real-world cyber-physical systems demand autonomy: street lights should respond to twilight or sunrise schedules, alarms should trigger on geofence entry, and notifications should dispatch based on weather alerts. This activity addresses the need for automated event chaining by linking third-party web triggers to physical hardware via cloud pipelines.
+          </p>
+          <h3 class="task-subheading"><i data-lucide="info"></i> Summary &amp; Expected Purpose</h3>
+          <p class="task-text">
+            Using IFTTT (If This Then That), I constructed an event-driven automation pipeline. An incoming digital trigger (such as a webhook event, schedule condition, or external API action) activates an IFTTT Applet. The Applet communicates with the Adafruit IO service, publishing an updated payload to our designated feed. The ESP32 receives the event via MQTT and executes the corresponding hardware action.
+          </p>
+        </section>
+
+        <!-- Section 2 — Concepts -->
+        <section class="task-doc-section" id="concepts">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="book-open"></i></div>
+            <div>
+              <span class="task-section-num">Section 02</span>
+              <h2 class="task-section-title">Concepts</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Automating actions across disparate web services requires understanding service orchestration and event-driven architectures:
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="zap"></i> The Concept of IoT Automation</h3>
+          <p class="task-text">
+            IoT automation removes the human bottleneck. Rather than waiting for a person to flip a switch, a software rule continually evaluates state conditions and dispatches instructions when pre-configured criteria are met.
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="git-commit"></i> What IFTTT Is and Why It Is Used</h3>
+          <p class="task-text">
+            IFTTT (If This Then That) is a web-based integration service that connects hundreds of popular digital services (Google Calendar, Webhooks, Location Services, Weather, Telegram, Adafruit IO). It allows developers to create conditional statements ("Applets") without writing custom server backends or managing continuous polling infrastructure.
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="play-circle"></i> The Trigger → Action Paradigm</h3>
+          <ul class="task-text" style="padding-left: 1.5rem;">
+            <li><strong>Trigger ("If This"):</strong> An external event that starts the execution (e.g., an HTTP webhook call or a scheduled time of day).</li>
+            <li><strong>Action ("Then That"):</strong> The resulting operation executed by IFTTT (e.g., sending data to an Adafruit IO feed).</li>
+          </ul>
+
+          <h3 class="task-subheading"><i data-lucide="cloud"></i> Role of Adafruit IO in Automation</h3>
+          <p class="task-text">
+            Adafruit IO bridges the high-level web service (IFTTT) with the low-level embedded hardware. By receiving the webhook payload from IFTTT, Adafruit IO converts it into an MQTT broadcast delivered to the ESP32 in sub-second latency.
+          </p>
+        </section>
+
+        <!-- Section 3 — System Design -->
+        <section class="task-doc-section" id="system-design">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="git-merge"></i></div>
+            <div>
+              <span class="task-section-num">Section 03</span>
+              <h2 class="task-section-title">System Design</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The event-driven system architecture routes signals through four distinct tiers:
+          </p>
+
+          <div class="task-diagram-box">
+            <div class="task-diagram-header"><i data-lucide="git-branch"></i> Event-Driven Automation Flow</div>
+            <div class="task-workflow-row">
+              <div class="task-wf-node"><span class="task-wf-node-badge">1</span> Trigger or Event</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">2</span> IFTTT Automation Applet</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">3</span> Adafruit IO Platform</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">4</span> MQTT Message Stream</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">5</span> ESP32 Microcontroller</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">6</span> Hardware Response</div>
+            </div>
+            <p class="task-callout-text" style="font-size: 0.82rem; color: var(--text-muted);">
+              The trigger fires independently of the ESP32. IFTTT connects to Adafruit IO via authenticated REST API, which automatically triggers MQTT pub/sub transmission down to the listening ESP32 client.
+            </p>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="layers"></i> Layered Roles in the Architecture</h3>
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Tier</th>
+                  <th>Component</th>
+                  <th>Responsibility</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Event Source</strong></td>
+                  <td>Webhook / Web Trigger</td>
+                  <td>Generates the initial event signal when condition is satisfied.</td>
+                </tr>
+                <tr>
+                  <td><strong>Orchestration Tier</strong></td>
+                  <td>IFTTT Service</td>
+                  <td>Evaluates rule logic and invokes Adafruit IO REST API endpoint.</td>
+                </tr>
+                <tr>
+                  <td><strong>IoT Broker Tier</strong></td>
+                  <td>Adafruit IO (MQTT)</td>
+                  <td>Receives API data and publishes payload to feed topic.</td>
+                </tr>
+                <tr>
+                  <td><strong>Physical Edge Tier</strong></td>
+                  <td>ESP32 + Actuator</td>
+                  <td>Receives MQTT packet and toggles GPIO output pin.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 4 — Hardware & Software -->
+        <section class="task-doc-section" id="hardware-software">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="cpu"></i></div>
+            <div>
+              <span class="task-section-num">Section 04</span>
+              <h2 class="task-section-title">Hardware &amp; Software</h2>
+            </div>
+          </div>
+
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Component / Tool</th>
+                  <th>Type</th>
+                  <th>Function in System</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ESP32 Microcontroller</strong></td>
+                  <td>Embedded Hardware</td>
+                  <td>Subscribes to Adafruit IO MQTT feed and controls output GPIO pin.</td>
+                </tr>
+                <tr>
+                  <td><strong>LED Circuit (with 220Ω Resistor)</strong></td>
+                  <td>Hardware Actuator</td>
+                  <td>Visual indicator responding to automated events.</td>
+                </tr>
+                <tr>
+                  <td><strong>IFTTT Account &amp; Applet</strong></td>
+                  <td>Automation Service</td>
+                  <td>Defines the Trigger → Action rule logic connecting external events to Adafruit IO.</td>
+                </tr>
+                <tr>
+                  <td><strong>Adafruit IO Platform</strong></td>
+                  <td>Cloud Service</td>
+                  <td>Authenticated target for IFTTT action and MQTT broker for ESP32.</td>
+                </tr>
+                <tr>
+                  <td><strong>Arduino IDE &amp; Libraries</strong></td>
+                  <td>Development Tool</td>
+                  <td>Compiles and flashes the MQTT subscriber firmware.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 5 — Wiring / Setup -->
+        <section class="task-doc-section" id="wiring-setup">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="git-commit"></i></div>
+            <div>
+              <span class="task-section-num">Section 05</span>
+              <h2 class="task-section-title">Wiring &amp; Setup</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The hardware wiring utilizes the established GPIO 2 output configuration:
+          </p>
+
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>ESP32 Pin</th>
+                  <th>Target Component</th>
+                  <th>Electrical Characteristics</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>GPIO 2</code></td>
+                  <td>LED Anode</td>
+                  <td>3.3V Logic Level Output</td>
+                </tr>
+                <tr>
+                  <td>LED Cathode</td>
+                  <td>220Ω Resistor</td>
+                  <td>Limits forward current to ~15mA</td>
+                </tr>
+                <tr>
+                  <td>220Ω Resistor</td>
+                  <td>ESP32 <code>GND</code></td>
+                  <td>Common ground return</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="settings"></i> Service Linkage Setup</h3>
+          <ol class="task-text" style="padding-left: 1.5rem;">
+            <li>Log into IFTTT and click <strong>Create</strong>.</li>
+            <li>In the <strong>If This</strong> block, select the trigger service (e.g., <em>Webhooks</em> with event name <code>iot_trigger</code>, or <em>Button Widget</em>).</li>
+            <li>In the <strong>Then That</strong> block, search for <em>Adafruit</em> and select <strong>Send data to Adafruit IO</strong>.</li>
+            <li>Authorize IFTTT to access your Adafruit IO account.</li>
+            <li>Select your feed name (<code>led-control</code>) and set the data to save (e.g. <code>1</code> or <code>ON</code>).</li>
+            <li>Save and activate the Applet.</li>
+          </ol>
+        </section>
+
+        <!-- Section 6 — Implementation -->
+        <section class="task-doc-section" id="implementation">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="code-2"></i></div>
+            <div>
+              <span class="task-section-num">Section 06</span>
+              <h2 class="task-section-title">Implementation</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The ESP32 firmware continuously monitors the MQTT feed for updates resulting from automated IFTTT executions:
+          </p>
+
+          <div class="task-code-wrapper">
+            <div class="task-code-header">
+              <span class="task-code-lang"><i data-lucide="file-code"></i> ESP32_IFTTT_Automation_Receiver.ino</span>
+              <button class="btn btn-sm btn-ghost task-copy-code-btn"><i data-lucide="copy"></i> Copy Code</button>
+            </div>
+            <pre class="task-code-block"><code>#include &lt;WiFi.h&gt;
+#include "Adafruit_MQTT.h"
+#include "Adafruit_MQTT_Client.h"
+
+// Wi-Fi Credentials
+#define WLAN_SSID       "YOUR_WIFI_SSID"
+#define WLAN_PASS       "YOUR_WIFI_PASSWORD"
+
+// Adafruit IO Broker Credentials
+#define AIO_SERVER      "io.adafruit.com"
+#define AIO_SERVERPORT  1883
+#define AIO_USERNAME    "YOUR_AIO_USERNAME"
+#define AIO_KEY         "YOUR_AIO_KEY"
+
+const int ledPin = 2;
+
+WiFiClient client;
+Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO_KEY);
+Adafruit_MQTT_Subscribe autoFeed = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/led-control");
+
+void MQTT_connect();
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
+
+  WiFi.begin(WLAN_SSID, WLAN_PASS);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi Connected! Listening for automated IFTTT events...");
+
+  mqtt.subscribe(&autoFeed);
+}
+
+void loop() {
+  MQTT_connect();
+
+  Adafruit_MQTT_Subscribe *subscription;
+  while ((subscription = mqtt.readSubscription(5000))) {
+    if (subscription == &autoFeed) {
+      char *payload = (char *)autoFeed.lastread;
+      Serial.print("[Automated Event Triggered] Payload: ");
+      Serial.println(payload);
+
+      if (strcmp(payload, "1") == 0 || strcasecmp(payload, "ON") == 0) {
+        digitalWrite(ledPin, HIGH);
+        Serial.println("Action Executed: Hardware turned ON via IFTTT automation");
+      } else if (strcmp(payload, "0") == 0 || strcasecmp(payload, "OFF") == 0) {
+        digitalWrite(ledPin, LOW);
+        Serial.println("Action Executed: Hardware turned OFF via IFTTT automation");
+      }
+    }
+  }
+
+  if (!mqtt.ping()) {
+    mqtt.disconnect();
+  }
+}
+
+void MQTT_connect() {
+  int8_t ret;
+  if (mqtt.connected()) return;
+  Serial.print("Connecting to MQTT... ");
+  while ((ret = mqtt.connect()) != 0) {
+    Serial.println(mqtt.connectErrorString(ret));
+    mqtt.disconnect();
+    delay(5000);
+  }
+  Serial.println("Connected!");
+}</code></pre>
+          </div>
+        </section>
+
+        <!-- Section 7 — Configuration -->
+        <section class="task-doc-section" id="configuration">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="settings"></i></div>
+            <div>
+              <span class="task-section-num">Section 07</span>
+              <h2 class="task-section-title">Configuration</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            To configure this automation pipeline securely:
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="sliders"></i> Setup Verification Steps</h3>
+          <ol class="task-text" style="padding-left: 1.5rem;">
+            <li>In the IFTTT Applet settings, ensure the <em>Receive notifications when this Applet runs</em> option is checked for testing.</li>
+            <li>Trigger the event manually or test the webhook using <code>curl -X POST https://maker.ifttt.com/trigger/iot_trigger/with/key/YOUR_IFTTT_KEY</code>.</li>
+            <li>Observe the IFTTT Activity log: verify status reports "Applet ran".</li>
+            <li>Check Adafruit IO feed history: verify new timestamped entry added by user "IFTTT".</li>
+            <li>Verify ESP32 Serial Monitor log: confirm payload arrival and GPIO actuation.</li>
+          </ol>
+        </section>
+
+        <!-- Section 8 — Evidence -->
+        <section class="task-doc-section" id="evidence">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="image"></i></div>
+            <div>
+              <span class="task-section-num">Section 08</span>
+              <h2 class="task-section-title">Evidence</h2>
+            </div>
+          </div>
+
+          <div class="task-evidence-grid">
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="sliders"></i></div>
+                <span class="task-evidence-filename">ifttt-applet-overview.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>IFTTT Applet:</strong> Configured rule connecting event trigger with Adafruit IO feed action.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="activity"></i></div>
+                <span class="task-evidence-filename">ifttt-activity-log.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Execution Log:</strong> IFTTT service log showing successful automated execution timestamp.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="cloud"></i></div>
+                <span class="task-evidence-filename">adafruit-feed-automation-update.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Adafruit IO Feed:</strong> Telemetry log showing payload inserted by IFTTT webhook action.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="check-circle"></i></div>
+                <span class="task-evidence-filename">esp32-automated-hardware-response.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Automated Actuation:</strong> ESP32 executing hardware state change without manual intervention.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 9 — Challenges & Fixes -->
+        <section class="task-doc-section" id="challenges">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="alert-triangle"></i></div>
+            <div>
+              <span class="task-section-num">Section 09</span>
+              <h2 class="task-section-title">Challenges &amp; Fixes</h2>
+            </div>
+          </div>
+
+          <div class="task-trouble-card">
+            <div class="task-trouble-step">
+              <span class="task-trouble-label problem"><i data-lucide="alert-circle"></i> Problem</span>
+              <span class="task-trouble-val">Noticeable delay (up to 45 seconds) between trigger firing and hardware LED toggling.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label"><i data-lucide="search"></i> Investigation</span>
+              <span class="task-trouble-val">Certain polling-based IFTTT triggers only check for new events periodically rather than dispatching instantly.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label solution"><i data-lucide="check"></i> Solution</span>
+              <span class="task-trouble-val">Configured a direct Webhook trigger (Maker Webhooks) with immediate push dispatch.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label outcome"><i data-lucide="award"></i> Outcome</span>
+              <span class="task-trouble-val">End-to-end execution latency dropped to under 1.5 seconds.</span>
+            </div>
+          </div>
+
+          <div class="task-trouble-card">
+            <div class="task-trouble-step">
+              <span class="task-trouble-label problem"><i data-lucide="alert-circle"></i> Problem</span>
+              <span class="task-trouble-val">Applet failed with "Action error: Feed Not Found".</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label"><i data-lucide="search"></i> Investigation</span>
+              <span class="task-trouble-val">The feed had been renamed in Adafruit IO from "LED Control" to "led-control", breaking the initial IFTTT dropdown cache.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label solution"><i data-lucide="check"></i> Solution</span>
+              <span class="task-trouble-val">Refreshed connected service credentials in IFTTT settings and re-selected the active slug.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label outcome"><i data-lucide="award"></i> Outcome</span>
+              <span class="task-trouble-val">100% reliable trigger-to-feed message transmission.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 10 — Reflection -->
+        <section class="task-doc-section" id="reflection">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="message-square"></i></div>
+            <div>
+              <span class="task-section-num">Section 10</span>
+              <h2 class="task-section-title">Reflection</h2>
+            </div>
+          </div>
+          <div class="task-callout">
+            <p class="task-callout-text font-italic" style="font-size: 0.95rem;">
+              "I explored how event-driven automation can extend an IoT system beyond manual control. This activity helped me understand the relationship between online services, cloud communication, and hardware responses, as well as the role of automation in connected applications. Seeing how third-party web events can seamlessly trigger physical electrical circuits demonstrated the true power of interconnected IoT ecosystems."
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 11 — Repository Link -->
+        <section class="task-doc-section" id="repository">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="github"></i></div>
+            <div>
+              <span class="task-section-num">Section 11</span>
+              <h2 class="task-section-title">Repository Link</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Source code sketches, Applet webhook guides, and technical notes are available on GitHub:
+          </p>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/JSairam2007/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <i data-lucide="github"></i> View Source Code on GitHub
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 12 — Activity-Specific Checklist -->
+        <section class="task-doc-section" id="checklist">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="check-square"></i></div>
+            <div>
+              <span class="task-section-num">Section 12</span>
+              <h2 class="task-section-title">Activity Checklist</h2>
+            </div>
+          </div>
+
+          <div class="task-checklist-box">
+            <div class="task-checklist-summary">
+              <span class="task-checklist-count" id="checklistCount">0 of 20 Completed</span>
+              <span class="category-badge badge-primary" id="checklistPercent">0%</span>
+            </div>
+            <ul class="task-checklist-items">
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Objective of the IoT automation.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Basic concept of IoT automation.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>What IFTTT is and why it is used.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Trigger → Action concept explained.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Role of Adafruit IO in the automation.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Hardware and software used.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>IFTTT Applet/workflow created and documented.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Trigger used identified.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Action performed identified.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>How the trigger reaches the IoT system.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Communication/data-flow diagram.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>ESP32 source code.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Screenshots of the IFTTT configuration.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Screenshots of the Adafruit IO dashboard/feed.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Photographs of the working prototype.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Video demonstrating the complete automation.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Automation tested under different conditions.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Problems and their solutions documented.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>What was learned about cloud-based automation.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" checked>
+                <span>Brief reflection on the assignment.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="task-bottom-nav" aria-label="Activity Navigation">
+          <a href="./task-2.html" class="task-nav-direction-btn">
+            <i data-lucide="arrow-left"></i> Previous: Task 2 (Adafruit IO &amp; MQTT)
+          </a>
+          <a href="../../index.html#protosem" class="btn btn-outline">
+            <i data-lucide="grid"></i> Week 07 Overview
+          </a>
+          <a href="./task-4.html" class="task-nav-direction-btn">
+            Next: Task 4 (Firebase Dashboard) <i data-lucide="arrow-right"></i>
+          </a>
+        </nav>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="footer-logo">&lt;JS/&gt; J Sairam</span>
+        <p class="footer-copy">Student at Kumaraguru College of Technology. ProtoSem Innovation Fellowship Journal.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#overview" class="back-to-top">
+          Back to Top <i data-lucide="arrow-up"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./task-details.js"></script>
+</body>
+</html>

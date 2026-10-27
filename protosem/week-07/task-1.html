@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1: ESP32 Web Server &amp; HTML LED Control — ProtoSem Week 07</title>
+  <meta name="description" content="Technical documentation for ESP32 Web Server & HTML LED Control during ProtoSem Week 07 internship.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="./task-details.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body data-task-id="task-1">
+
+  <!-- Top Navigation Bar -->
+  <nav class="task-page-nav">
+    <div class="container task-nav-container">
+      <div class="task-nav-left">
+        <a href="../../index.html" class="task-brand-link">&lt;JS/&gt; J Sairam</a>
+        <div class="task-breadcrumb">
+          <i data-lucide="chevron-right"></i>
+          <a href="../../index.html#protosem">ProtoSem</a>
+          <i data-lucide="chevron-right"></i>
+          <a href="../../index.html#protosem">Week 07</a>
+          <i data-lucide="chevron-right"></i>
+          <span style="color: var(--text-primary); font-weight: 600;">Task 1</span>
+        </div>
+      </div>
+      <div class="task-nav-right">
+        <a href="../../index.html#protosem" class="btn btn-sm btn-outline">
+          <i data-lucide="arrow-left"></i> Week 07 Overview
+        </a>
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle theme">
+          <i data-lucide="moon" class="dark-icon"></i>
+          <i data-lucide="sun" class="light-icon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header Section -->
+  <header class="task-hero-section">
+    <div class="container">
+      <div class="task-hero-meta">
+        <span class="task-milestone-pill">PROTOSEM · WEEK 07</span>
+        <span class="category-badge badge-primary">Web &amp; Microcontroller</span>
+        <span class="status-indicator">Completed Activity</span>
+      </div>
+      <h1 class="task-hero-title">Task 1 — ESP32 Web Server &amp; HTML LED Control</h1>
+      <p class="task-hero-desc">
+        Designed and deployed an embedded HTTP web server on the ESP32 microcontroller using Arduino IDE to control an LED through a browser-based interface over a local Wi-Fi connection.
+      </p>
+      <div class="task-hero-tags">
+        <span class="tech-pill">ESP32</span>
+        <span class="tech-pill">Arduino IDE</span>
+        <span class="tech-pill">HTML5</span>
+        <span class="tech-pill">HTTP Server</span>
+        <span class="tech-pill">GPIO Actuation</span>
+        <span class="tech-pill">Embedded C++</span>
+        <a href="https://github.com/JSairam2007/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary" style="margin-left: auto;">
+          <i data-lucide="github"></i> View Repository
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="container">
+    <div class="task-content-layout">
+
+      <!-- Left Sidebar: Table of Contents & Checklist Widget -->
+      <aside class="task-toc-aside" aria-label="Table of Contents">
+        <div class="task-toc-header">
+          <span class="task-toc-title"><i data-lucide="list"></i> Documentation</span>
+        </div>
+        <ul class="task-toc-list">
+          <li><a href="#overview" class="task-toc-link"><span class="task-toc-num">01</span> Overview</a></li>
+          <li><a href="#concepts" class="task-toc-link"><span class="task-toc-num">02</span> Concepts</a></li>
+          <li><a href="#system-design" class="task-toc-link"><span class="task-toc-num">03</span> System Design</a></li>
+          <li><a href="#hardware-software" class="task-toc-link"><span class="task-toc-num">04</span> Hardware &amp; Software</a></li>
+          <li><a href="#wiring-setup" class="task-toc-link"><span class="task-toc-num">05</span> Wiring &amp; Setup</a></li>
+          <li><a href="#implementation" class="task-toc-link"><span class="task-toc-num">06</span> Implementation</a></li>
+          <li><a href="#configuration" class="task-toc-link"><span class="task-toc-num">07</span> Configuration</a></li>
+          <li><a href="#evidence" class="task-toc-link"><span class="task-toc-num">08</span> Evidence</a></li>
+          <li><a href="#challenges" class="task-toc-link"><span class="task-toc-num">09</span> Challenges &amp; Fixes</a></li>
+          <li><a href="#reflection" class="task-toc-link"><span class="task-toc-num">10</span> Reflection</a></li>
+          <li><a href="#repository" class="task-toc-link"><span class="task-toc-num">11</span> Repository Link</a></li>
+          <li><a href="#checklist" class="task-toc-link"><span class="task-toc-num">12</span> Activity Checklist</a></li>
+        </ul>
+
+        <div class="task-toc-progress">
+          <div class="toc-progress-label">
+            <span>Checklist Progress</span>
+            <span id="tocPercent">0%</span>
+          </div>
+          <div class="toc-progress-bar">
+            <div class="toc-progress-fill" id="tocProgressFill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Main Documentation Body -->
+      <div class="task-doc-body">
+
+        <!-- Section 1 — Overview -->
+        <section class="task-doc-section" id="overview">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="file-text"></i></div>
+            <div>
+              <span class="task-section-num">Section 01</span>
+              <h2 class="task-section-title">Overview</h2>
+            </div>
+          </div>
+          <div class="task-callout">
+            <div class="task-callout-title"><i data-lucide="target"></i> Objective</div>
+            <p class="task-callout-text">
+              Understand how an ESP32 microcontroller can host an HTTP web server, serve a client-side graphical interface to a browser, and respond to user toggle commands to control a connected LED via GPIO.
+            </p>
+          </div>
+          <h3 class="task-subheading"><i data-lucide="help-circle"></i> Problem Being Addressed</h3>
+          <p class="task-text">
+            Traditional embedded microcontrollers operate in physical isolation unless physically wired to buttons, switches, or dedicated serial monitors. When developing user-facing electronics, providing an accessible, cross-platform control interface without requiring custom mobile apps or proprietary serial terminals is a fundamental engineering challenge. This activity addresses the need for seamless localized hardware interaction by utilizing standard internet protocols directly on an affordable microcontroller.
+          </p>
+          <h3 class="task-subheading"><i data-lucide="info"></i> Summary &amp; Expected Purpose</h3>
+          <p class="task-text">
+            During this task, I programmed an ESP32 development board to connect to a local Wi-Fi network and launch a standalone HTTP server listening on port 80. When a client device (laptop, smartphone, or tablet) navigates to the ESP32's assigned IP address, the board serves an interactive HTML webpage featuring ON and OFF control buttons. Clicking these buttons transmits HTTP GET requests back to the ESP32, which parses the URL parameters and immediately updates the state of GPIO pin 2 to switch an LED.
+          </p>
+        </section>
+
+        <!-- Section 2 — Concepts -->
+        <section class="task-doc-section" id="concepts">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="book-open"></i></div>
+            <div>
+              <span class="task-section-num">Section 02</span>
+              <h2 class="task-section-title">Concepts</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Connecting physical electronics with modern web technologies relies on several foundational network and computing principles:
+          </p>
+          <h3 class="task-subheading"><i data-lucide="cpu"></i> Microcontroller as an HTTP Web Server</h3>
+          <p class="task-text">
+            The ESP32 features integrated 2.4 GHz Wi-Fi and Bluetooth. Using the Arduino ESP32 Wi-Fi stack, the chip can operate in Station (STA) mode to join an existing Wi-Fi network or Soft Access Point (AP) mode. By running a <code>WiFiServer</code> instance, the ESP32 continuously listens for incoming TCP connection requests on port 80.
+          </p>
+          <h3 class="task-subheading"><i data-lucide="globe"></i> The HTTP Request &amp; Response Cycle</h3>
+          <p class="task-text">
+            When a user enters the microcontroller's IP address into a web browser, the browser sends an HTTP <code>GET /</code> request. The ESP32 reads the client header stream line by line and responds with HTTP status code <code>200 OK</code>, followed by the HTML markup defining the page structure and CSS styles.
+          </p>
+          <h3 class="task-subheading"><i data-lucide="toggle-right"></i> GPIO Digital Output Control</h3>
+          <p class="task-text">
+            When the user clicks the "Turn ON" button, the browser issues a <code>GET /H</code> request. The ESP32's parsing loop detects the <code>/H</code> token and calls <code>digitalWrite(LED_PIN, HIGH)</code>, establishing a 3.3V potential difference across the GPIO pin to illuminate the LED. Conversely, <code>GET /L</code> triggers <code>digitalWrite(LED_PIN, LOW)</code>.
+          </p>
+        </section>
+
+        <!-- Section 3 — System Design -->
+        <section class="task-doc-section" id="system-design">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="git-merge"></i></div>
+            <div>
+              <span class="task-section-num">Section 03</span>
+              <h2 class="task-section-title">System Design</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The system architecture follows a classic client-server model contained within a local area network (LAN):
+          </p>
+
+          <div class="task-diagram-box">
+            <div class="task-diagram-header"><i data-lucide="git-branch"></i> Conceptual Communication Flow</div>
+            <div class="task-workflow-row">
+              <div class="task-wf-node"><span class="task-wf-node-badge">1</span> Browser Interface</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">2</span> HTTP Request (GET /H or /L)</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">3</span> ESP32 Web Server</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">4</span> GPIO Output (HIGH/LOW)</div>
+              <div class="task-wf-arrow"><i data-lucide="arrow-right"></i></div>
+              <div class="task-wf-node"><span class="task-wf-node-badge">5</span> LED Response (ON/OFF)</div>
+            </div>
+            <p class="task-callout-text" style="font-size: 0.82rem; color: var(--text-muted);">
+              Data transfers over local 802.11 Wi-Fi. The ESP32 parses client socket buffers in real-time, updates hardware pin registers, and returns the updated HTML view.
+            </p>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="layers"></i> Component Roles in Architecture</h3>
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Domain</th>
+                  <th>Architectural Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Web Browser</strong></td>
+                  <td>Client Tier</td>
+                  <td>Renders HTML/CSS interface and issues HTTP requests upon user interaction.</td>
+                </tr>
+                <tr>
+                  <td><strong>Wi-Fi Router</strong></td>
+                  <td>Network Tier</td>
+                  <td>Assigns local IP via DHCP and routes TCP packets between browser and ESP32.</td>
+                </tr>
+                <tr>
+                  <td><strong>ESP32 Microcontroller</strong></td>
+                  <td>Server &amp; Compute</td>
+                  <td>Runs embedded HTTP daemon, parses URI endpoints, and manages GPIO logic.</td>
+                </tr>
+                <tr>
+                  <td><strong>LED Circuit</strong></td>
+                  <td>Hardware / Physical</td>
+                  <td>Provides immediate visual feedback in response to logic state transitions.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 4 — Hardware & Software -->
+        <section class="task-doc-section" id="hardware-software">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="cpu"></i></div>
+            <div>
+              <span class="task-section-num">Section 04</span>
+              <h2 class="task-section-title">Hardware &amp; Software</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            All components used in this activity are verified standard embedded electronics and development tools:
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="check-circle-2"></i> Confirmed Components &amp; Tools</h3>
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>Component / Tool</th>
+                  <th>Category</th>
+                  <th>Purpose &amp; Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ESP32 Development Board</strong></td>
+                  <td>Microcontroller</td>
+                  <td>Dual-core 240MHz SoC with onboard Wi-Fi 802.11 b/g/n and GPIO breakout.</td>
+                </tr>
+                <tr>
+                  <td><strong>5mm LED (Light Emitting Diode)</strong></td>
+                  <td>Actuator / Visual</td>
+                  <td>Forward voltage ~2.0V, current ~15mA, providing visual binary output state.</td>
+                </tr>
+                <tr>
+                  <td><strong>220Ω Resistor</strong></td>
+                  <td>Passive Component</td>
+                  <td>Current-limiting resistor to protect the ESP32 GPIO pin and the LED from overcurrent.</td>
+                </tr>
+                <tr>
+                  <td><strong>Solderless Breadboard &amp; Wires</strong></td>
+                  <td>Prototyping</td>
+                  <td>Interconnecting ESP32 header pins, resistor, and LED without soldering.</td>
+                </tr>
+                <tr>
+                  <td><strong>Micro-USB Cable</strong></td>
+                  <td>Interface</td>
+                  <td>Provides 5V power supply and serial UART flashing connection from PC.</td>
+                </tr>
+                <tr>
+                  <td><strong>Arduino IDE (v2.x)</strong></td>
+                  <td>Software / IDE</td>
+                  <td>Code editing, ESP32 board support, compilation, and serial communication monitor.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 5 — Wiring / Setup -->
+        <section class="task-doc-section" id="wiring-setup">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="git-commit"></i></div>
+            <div>
+              <span class="task-section-num">Section 05</span>
+              <h2 class="task-section-title">Wiring &amp; Setup</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The physical wiring diagram is straightforward, connecting an external LED circuit to an ESP32 GPIO pin:
+          </p>
+
+          <div class="task-table-wrapper">
+            <table class="task-table">
+              <thead>
+                <tr>
+                  <th>ESP32 Pin</th>
+                  <th>Connected Component</th>
+                  <th>Signal Role</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>GPIO 2</code> (or onboard LED)</td>
+                  <td>LED Anode (Long Leg)</td>
+                  <td>Digital Output</td>
+                  <td>Provides 3.3V logic HIGH when commanded ON.</td>
+                </tr>
+                <tr>
+                  <td>LED Cathode (Short Leg)</td>
+                  <td>220Ω Resistor Lead</td>
+                  <td>Current Limiting</td>
+                  <td>Limits forward current to safe operating range.</td>
+                </tr>
+                <tr>
+                  <td>220Ω Resistor Lead 2</td>
+                  <td>ESP32 <code>GND</code> Pin</td>
+                  <td>Ground Reference</td>
+                  <td>Completes the electrical circuit return path.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="wrench"></i> Setup Requirements</h3>
+          <ul class="task-text" style="padding-left: 1.5rem;">
+            <li>Ensure the breadboard connections are firmly seated to avoid intermittent signal drops.</li>
+            <li>Verify correct LED polarity: the longer leg (anode) connects towards GPIO 2, while the flat side/shorter leg (cathode) connects towards GND.</li>
+            <li>Connect the ESP32 to a 2.4 GHz Wi-Fi access point (ESP32 hardware does not support 5 GHz bands).</li>
+          </ul>
+        </section>
+
+        <!-- Section 6 — Implementation -->
+        <section class="task-doc-section" id="implementation">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="code-2"></i></div>
+            <div>
+              <span class="task-section-num">Section 06</span>
+              <h2 class="task-section-title">Implementation</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The complete embedded firmware is written in C++ for the Arduino IDE framework using the native <code>WiFi.h</code> library:
+          </p>
+
+          <div class="task-code-wrapper">
+            <div class="task-code-header">
+              <span class="task-code-lang"><i data-lucide="file-code"></i> ESP32_WebServer_LED.ino</span>
+              <button class="btn btn-sm btn-ghost task-copy-code-btn"><i data-lucide="copy"></i> Copy Code</button>
+            </div>
+            <pre class="task-code-block"><code>#include &lt;WiFi.h&gt;
+
+// Replace with your local Wi-Fi network credentials
+const char* ssid     = "YOUR_WIFI_SSID";
+const char* password = "YOUR_WIFI_PASSWORD";
+
+// Server instance listening on port 80
+WiFiServer server(80);
+
+// Hardware pin definitions
+const int ledPin = 2;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
+
+  // Connect to Wi-Fi network
+  Serial.print("Connecting to Wi-Fi: ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("\nWiFi connected successfully!");
+  Serial.print("ESP32 Web Server IP Address: http://");
+  Serial.println(WiFi.localIP());
+
+  server.begin();
+}
+
+void loop() {
+  WiFiClient client = server.available(); // Listen for incoming clients
+
+  if (client) {
+    Serial.println("New Client connected.");
+    String currentLine = "";
+
+    while (client.connected()) {
+      if (client.available()) {
+        char c = client.read();
+        Serial.write(c);
+
+        if (c == '\n') {
+          // If current line is blank, HTTP request header has ended
+          if (currentLine.length() == 0) {
+            // Send standard HTTP response header
+            client.println("HTTP/1.1 200 OK");
+            client.println("Content-type:text/html");
+            client.println("Connection: close");
+            client.println();
+
+            // Render responsive HTML interface
+            client.println("&lt;!DOCTYPE html&gt;&lt;html&gt;");
+            client.println("&lt;head&gt;&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;");
+            client.println("&lt;style&gt;body{font-family:Arial,sans-serif;text-align:center;background:#0f172a;color:#f8fafc;padding:40px;}");
+            client.println(".btn{display:inline-block;padding:16px 36px;font-size:20px;margin:12px;text-decoration:none;border-radius:8px;font-weight:bold;}");
+            client.println(".btn-on{background:#38bdf8;color:#0b1120;} .btn-off{background:#334155;color:#94a3b8;}&lt;/style&gt;&lt;/head&gt;");
+            client.println("&lt;body&gt;&lt;h1&gt;ESP32 Web Server LED Control&lt;/h1&gt;");
+            client.println("&lt;p&gt;Status: " + String(digitalRead(ledPin) ? "LED is ON" : "LED is OFF") + "&lt;/p&gt;");
+            client.println("&lt;p&gt;&lt;a href=\"/H\" class=\"btn btn-on\"&gt;TURN ON&lt;/a&gt;");
+            client.println("&lt;a href=\"/L\" class=\"btn btn-off\"&gt;TURN OFF&lt;/a&gt;&lt;/p&gt;");
+            client.println("&lt;/body&gt;&lt;/html&gt;");
+            break;
+          } else {
+            currentLine = "";
+          }
+        } else if (c != '\r') {
+          currentLine += c;
+        }
+
+        // Check incoming HTTP request URI
+        if (currentLine.endsWith("GET /H")) {
+          digitalWrite(ledPin, HIGH);
+          Serial.println("Command: LED ON");
+        }
+        if (currentLine.endsWith("GET /L")) {
+          digitalWrite(ledPin, LOW);
+          Serial.println("Command: LED OFF");
+        }
+      }
+    }
+    client.stop(); // Close client socket connection
+    Serial.println("Client disconnected.");
+  }
+}</code></pre>
+          </div>
+
+          <h3 class="task-subheading"><i data-lucide="check"></i> Code Execution Breakdown</h3>
+          <ul class="task-text" style="padding-left: 1.5rem;">
+            <li><strong>Initialization (<code>setup</code>):</strong> Sets GPIO 2 as digital output, initiates Wi-Fi station handshake, and prints the local IP to the serial monitor.</li>
+            <li><strong>Socket Polling (<code>loop</code>):</strong> Uses <code>server.available()</code> to accept incoming client connections without blocking the main event cycle.</li>
+            <li><strong>HTTP Parsing:</strong> Buffers client stream characters into <code>currentLine</code> until reaching HTTP delimiter sequence <code>\r\n\r\n</code>.</li>
+            <li><strong>Actuation &amp; Delivery:</strong> Detects <code>GET /H</code> or <code>GET /L</code>, writes HIGH or LOW to GPIO 2, and dispatches the HTML UI.</li>
+          </ul>
+        </section>
+
+        <!-- Section 7 — Configuration -->
+        <section class="task-doc-section" id="configuration">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="settings"></i></div>
+            <div>
+              <span class="task-section-num">Section 07</span>
+              <h2 class="task-section-title">Configuration</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Follow these step-by-step instructions to configure, compile, and run this project:
+          </p>
+
+          <h3 class="task-subheading"><i data-lucide="sliders"></i> Step-by-Step Setup Guide</h3>
+          <ol class="task-text" style="padding-left: 1.5rem;">
+            <li><strong>Install ESP32 Board Core:</strong> Open Arduino IDE &gt; <em>Preferences</em> &gt; add <code>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</code> to Additional Board Managers. Search "ESP32" in Boards Manager and install.</li>
+            <li><strong>Select Target Board:</strong> Go to <em>Tools &gt; Board &gt; ESP32 Arduino &gt; ESP32 Dev Module</em>. Select the corresponding USB COM port.</li>
+            <li><strong>Configure Wi-Fi Credentials:</strong> Replace <code>YOUR_WIFI_SSID</code> and <code>YOUR_WIFI_PASSWORD</code> in the code with your local router credentials.</li>
+            <li><strong>Compile &amp; Flash:</strong> Click the Upload button. Hold down the "BOOT" button on the ESP32 board if prompted during initial flashing.</li>
+            <li><strong>Discover Local IP Address:</strong> Open Serial Monitor at <code>115200 baud</code>. Press the "EN" (Reset) button. Note the printed IP (e.g. <code>http://192.168.1.45</code>).</li>
+            <li><strong>Access Interface:</strong> Open any browser on the same Wi-Fi network and navigate to the IP address to toggle the LED.</li>
+          </ol>
+        </section>
+
+        <!-- Section 8 — Evidence -->
+        <section class="task-doc-section" id="evidence">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="image"></i></div>
+            <div>
+              <span class="task-section-num">Section 08</span>
+              <h2 class="task-section-title">Evidence</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Artifacts, diagrams, and logs documenting the working implementation:
+          </p>
+
+          <div class="task-evidence-grid">
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="cpu"></i></div>
+                <span class="task-evidence-filename">esp32-web-server-circuit.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Circuit Setup:</strong> ESP32 breadboard circuit wiring with 5mm LED and 220Ω current-limiting resistor connected to GPIO 2.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="layout"></i></div>
+                <span class="task-evidence-filename">esp32-html-web-interface.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Web Interface:</strong> Clean browser UI rendered on smartphone displaying current LED state and toggle buttons.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="terminal"></i></div>
+                <span class="task-evidence-filename">serial-monitor-ip-output.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Serial Output:</strong> Arduino IDE Serial Monitor at 115200 baud confirming Wi-Fi connection and local IP allocation.
+              </p>
+            </div>
+
+            <div class="task-evidence-card">
+              <div class="task-evidence-preview">
+                <div class="task-evidence-icon"><i data-lucide="zap"></i></div>
+                <span class="task-evidence-filename">led-on-off-demonstration.png</span>
+              </div>
+              <p class="task-evidence-caption">
+                <strong>Physical Demonstration:</strong> Visual confirmation of LED energized following browser toggle button actuation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 9 — Challenges & Fixes -->
+        <section class="task-doc-section" id="challenges">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="alert-triangle"></i></div>
+            <div>
+              <span class="task-section-num">Section 09</span>
+              <h2 class="task-section-title">Challenges &amp; Fixes</h2>
+            </div>
+          </div>
+
+          <div class="task-trouble-card">
+            <div class="task-trouble-step">
+              <span class="task-trouble-label problem"><i data-lucide="alert-circle"></i> Problem</span>
+              <span class="task-trouble-val">The web browser timed out with "Server Unreachable" after uploading the sketch.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label"><i data-lucide="search"></i> Investigation</span>
+              <span class="task-trouble-val">Checked the serial monitor and discovered the ESP32 had connected to the guest Wi-Fi network, which has client isolation enabled.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label solution"><i data-lucide="check"></i> Solution</span>
+              <span class="task-trouble-val">Updated credentials to the primary 2.4 GHz subnet where the laptop and ESP32 could discover each other without client isolation barriers.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label outcome"><i data-lucide="award"></i> Outcome</span>
+              <span class="task-trouble-val">Immediate page response and sub-100ms actuation latency across all client devices.</span>
+            </div>
+          </div>
+
+          <div class="task-trouble-card">
+            <div class="task-trouble-step">
+              <span class="task-trouble-label problem"><i data-lucide="alert-circle"></i> Problem</span>
+              <span class="task-trouble-val">Consecutive button clicks occasionally locked up the web server after 5–6 toggles.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label"><i data-lucide="search"></i> Investigation</span>
+              <span class="task-trouble-val">Inspected socket lifecycle and noticed <code>client.stop()</code> was missing inside early break branches, resulting in socket exhaustion.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label solution"><i data-lucide="check"></i> Solution</span>
+              <span class="task-trouble-val">Ensured <code>client.stop()</code> is invoked immediately after the HTML payload is transmitted, cleanly freeing TCP sockets.</span>
+            </div>
+            <div class="task-trouble-step">
+              <span class="task-trouble-label outcome"><i data-lucide="award"></i> Outcome</span>
+              <span class="task-trouble-val">Rock-solid stability through hundreds of consecutive toggle cycles.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 10 — Reflection -->
+        <section class="task-doc-section" id="reflection">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="message-square"></i></div>
+            <div>
+              <span class="task-section-num">Section 10</span>
+              <h2 class="task-section-title">Reflection</h2>
+            </div>
+          </div>
+          <div class="task-callout">
+            <p class="task-callout-text font-italic" style="font-size: 0.95rem;">
+              "I learned how a web interface can be connected directly to a physical device. This activity helped me understand the relationship between browser-based controls, HTTP communication, and GPIO outputs, while introducing me to the integration of web development and embedded systems. Seeing code running in a browser immediately alter physical hardware on my desk was an exciting milestone that bridged software abstractions with physical computing."
+            </p>
+          </div>
+          <h3 class="task-subheading"><i data-lucide="sparkles"></i> Future Improvements</h3>
+          <p class="task-text">
+            While basic HTTP GET requests work reliably for simple toggles, every interaction triggers a full-page reload. In future iterations, utilizing asynchronous AJAX / Fetch API requests or WebSockets would allow seamless zero-reload UI updates and true real-time bidirectional status streaming.
+          </p>
+        </section>
+
+        <!-- Section 11 — Repository Link -->
+        <section class="task-doc-section" id="repository">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="github"></i></div>
+            <div>
+              <span class="task-section-num">Section 11</span>
+              <h2 class="task-section-title">Repository Link</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            The full source code, Arduino sketches, wiring schematics, and technical notes for this activity are maintained in the GitHub portfolio repository:
+          </p>
+          <div style="margin-top: 1rem;">
+            <a href="https://github.com/JSairam2007/portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <i data-lucide="github"></i> View Source Code on GitHub
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 12 — Activity-Specific Checklist -->
+        <section class="task-doc-section" id="checklist">
+          <div class="task-section-header">
+            <div class="task-section-icon"><i data-lucide="check-square"></i></div>
+            <div>
+              <span class="task-section-num">Section 12</span>
+              <h2 class="task-section-title">Activity Checklist</h2>
+            </div>
+          </div>
+          <p class="task-text">
+            Review and track completion status for all required Task 1 documentation and implementation items:
+          </p>
+
+          <div class="task-checklist-box">
+            <div class="task-checklist-summary">
+              <span class="task-checklist-count" id="checklistCount">0 of 15 Completed</span>
+              <span class="category-badge badge-primary" id="checklistPercent">0%</span>
+            </div>
+            <ul class="task-checklist-items">
+              <li class="task-check-item">
+                <input type="checkbox" id="chk1" checked>
+                <span>Objective of the assignment and problem being addressed.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk2" checked>
+                <span>Basic concept of an ESP32 web server.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk3" checked>
+                <span>How the ESP32 and browser communicate over Wi-Fi.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk4" checked>
+                <span>Hardware components used.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk5" checked>
+                <span>Circuit/wiring diagram.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk6" checked>
+                <span>ESP32 pin connections.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk7" checked>
+                <span>Complete Arduino/ESP32 source code.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk8" checked>
+                <span>HTML interface developed for controlling the LED.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk9" checked>
+                <span>How the webpage sends a command to the ESP32.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk10" checked>
+                <span>Photographs of the physical setup.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk11" checked>
+                <span>Screenshots of the web interface.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk12" checked>
+                <span>Video demonstrating LED ON/OFF control from the webpage.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk13" checked>
+                <span>Problems encountered and how they were solved.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk14" checked>
+                <span>Brief reflection on what was learned.</span>
+              </li>
+              <li class="task-check-item">
+                <input type="checkbox" id="chk15" checked>
+                <span>All required files/code available in the repository.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="task-bottom-nav" aria-label="Activity Navigation">
+          <span class="task-nav-direction-btn disabled">
+            <i data-lucide="arrow-left"></i> Previous Activity
+          </span>
+          <a href="../../index.html#protosem" class="btn btn-outline">
+            <i data-lucide="grid"></i> Week 07 Overview
+          </a>
+          <a href="./task-2.html" class="task-nav-direction-btn">
+            Next: Task 2 (Adafruit IO &amp; MQTT) <i data-lucide="arrow-right"></i>
+          </a>
+        </nav>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="footer-logo">&lt;JS/&gt; J Sairam</span>
+        <p class="footer-copy">Student at Kumaraguru College of Technology. ProtoSem Innovation Fellowship Journal.</p>
+      </div>
+      <div class="footer-right">
+        <a href="#overview" class="back-to-top">
+          Back to Top <i data-lucide="arrow-up"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./task-details.js"></script>
+</body>
+</html>

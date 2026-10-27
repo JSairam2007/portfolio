@@ -775,58 +775,71 @@
 
             <!-- Overview Paragraph -->
             <div class="proto-block">
-              <h4 class="proto-block-title"><i data-lucide="file-text"></i> Detailed Overview</h4>
+              <div class="proto-block-header-row">
+                <h4 class="proto-block-title"><i data-lucide="file-text"></i> Detailed Overview</h4>
+                <a href="#protosem" class="proto-back-link" id="protoBackLink" style="display: none;">
+                  <i data-lucide="arrow-left"></i> ProtoSem Overview
+                </a>
+              </div>
               <p class="proto-block-text" id="protoWeekOverview">
                 Week 0 focused on understanding the ProtoSem program and preparing for the learning journey ahead.
               </p>
             </div>
 
-            <!-- Learning Insights -->
-            <div class="proto-block">
-              <h4 class="proto-block-title"><i data-lucide="lightbulb"></i> Learning Insights</h4>
-              <div class="proto-insights-list" id="protoInsightsList">
-                <!-- Dynamically populated insights -->
+            <!-- Dynamic Tasks & Deep-Dive Container (Used for Week 07) -->
+            <div id="protoTasksContainer" style="display: none;">
+              <!-- Dynamically populated with 5-task navigator, workflows, progression, and learning outcomes -->
+            </div>
+
+            <!-- Default Weekly Single-View Blocks (Used for Week 0, Week 6, etc.) -->
+            <div id="protoDefaultBlocks">
+              <!-- Learning Insights -->
+              <div class="proto-block">
+                <h4 class="proto-block-title"><i data-lucide="lightbulb"></i> Learning Insights</h4>
+                <div class="proto-insights-list" id="protoInsightsList">
+                  <!-- Dynamically populated insights -->
+                </div>
               </div>
-            </div>
 
-            <!-- Practical Work & Activities -->
-            <div class="proto-block">
-              <h4 class="proto-block-title"><i data-lucide="check-square"></i> Activities &amp; Practical Work</h4>
-              <ul class="proto-checklist" id="protoActivitiesList">
-                <!-- Dynamically populated activities -->
-              </ul>
-            </div>
-
-            <!-- Technologies & Methodologies (Tags) -->
-            <div class="proto-block">
-              <h4 class="proto-block-title"><i data-lucide="cpu"></i> Technologies &amp; Methodologies</h4>
-              <div class="proto-tags" id="protoTechTags">
-                <!-- Dynamically populated tags -->
+              <!-- Practical Work & Activities -->
+              <div class="proto-block">
+                <h4 class="proto-block-title"><i data-lucide="check-square"></i> Activities &amp; Practical Work</h4>
+                <ul class="proto-checklist" id="protoActivitiesList">
+                  <!-- Dynamically populated activities -->
+                </ul>
               </div>
-            </div>
 
-            <!-- Skills Learned (Chips) -->
-            <div class="proto-block">
-              <h4 class="proto-block-title"><i data-lucide="sparkles"></i> Skills Learned &amp; Practiced</h4>
-              <div class="proto-skills" id="protoSkillsTags">
-                <!-- Dynamically populated skill chips -->
+              <!-- Technologies & Methodologies (Tags) -->
+              <div class="proto-block">
+                <h4 class="proto-block-title"><i data-lucide="cpu"></i> Technologies &amp; Methodologies</h4>
+                <div class="proto-tags" id="protoTechTags">
+                  <!-- Dynamically populated tags -->
+                </div>
               </div>
-            </div>
 
-            <!-- Challenges & Problem Solving -->
-            <div class="proto-block proto-challenges-box" id="protoChallengeBox">
-              <h4 class="proto-block-title"><i data-lucide="alert-circle"></i> Challenges &amp; Problem-Solving</h4>
-              <p class="proto-challenge-text" id="protoChallengeText">
-                <!-- Dynamically populated challenge narrative -->
-              </p>
-            </div>
+              <!-- Skills Learned (Chips) -->
+              <div class="proto-block">
+                <h4 class="proto-block-title"><i data-lucide="sparkles"></i> Skills Learned &amp; Practiced</h4>
+                <div class="proto-skills" id="protoSkillsTags">
+                  <!-- Dynamically populated skill chips -->
+                </div>
+              </div>
 
-            <!-- Key Takeaways -->
-            <div class="proto-block">
-              <h4 class="proto-block-title"><i data-lucide="bookmark-check"></i> Key Takeaways</h4>
-              <ul class="proto-takeaways-list" id="protoTakeawaysList">
-                <!-- Dynamically populated takeaways -->
-              </ul>
+              <!-- Challenges & Problem Solving -->
+              <div class="proto-block proto-challenges-box" id="protoChallengeBox">
+                <h4 class="proto-block-title"><i data-lucide="alert-circle"></i> Challenges &amp; Problem-Solving</h4>
+                <p class="proto-challenge-text" id="protoChallengeText">
+                  <!-- Dynamically populated challenge narrative -->
+                </p>
+              </div>
+
+              <!-- Key Takeaways -->
+              <div class="proto-block">
+                <h4 class="proto-block-title"><i data-lucide="bookmark-check"></i> Key Takeaways</h4>
+                <ul class="proto-takeaways-list" id="protoTakeawaysList">
+                  <!-- Dynamically populated takeaways -->
+                </ul>
+              </div>
             </div>
 
           </div>
